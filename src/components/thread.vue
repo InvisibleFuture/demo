@@ -161,12 +161,11 @@ export default {
   },
   methods: {
     fetchData: async function() {
-      let server = 'http://127.0.0.1'
-      server = ''
+      let server = this.$store.state.server.master.domain
       axios.get( server + '/thread-' + this.id + '.htm?ajax=1').then(r => {
         this.thread = r.data.message.thread,
-          this.first = r.data.message.first,
-          this.postlist = r.data.message.postlist
+        this.first = r.data.message.first,
+        this.postlist = r.data.message.postlist
       })
     },
     postMsg: async function() {

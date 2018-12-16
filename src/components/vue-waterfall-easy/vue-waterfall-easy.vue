@@ -177,7 +177,7 @@
         <div class="img-box" v-for="(v,i) in imgsArr_c" :class="[cardAnimationClass, {__err__: v._error}]" :style="{padding: (isMobile ? mobileGap : gap)/2+'px', width: isMobile ? '' : colWidth+'px'}">
 
           <div class="img-inner-box">
-            <a class="img-wraper" v-if="v[srcKey]" @click.stop="layer_on" :data-id="v[hrefKey]" :href="'thread-'+v[hrefKey]+'.htm'" :style="{width:imgWidth_c + 'px',height:v._height ? v._height+'px':false}"><img :src="v[srcKey]" /></a>
+            <a class="img-wraper" v-if="v[srcKey]" @click.stop="layer_on" :data-id="v[hrefKey]" :href="'thread'+v[hrefKey]" :style="{width:imgWidth_c + 'px',height:v._height ? v._height+'px':false}"><img :src="v[srcKey]" /></a>
             <slot :index="i" :value="v"></slot>
             <!--  -->
             <div class="img-info">

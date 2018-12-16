@@ -31,7 +31,7 @@ export default {
         {
           id: 666,
           name: 'collect',
-          url: 'forum-1.htm'
+          url: 'forum3'
         }
       ]
     }

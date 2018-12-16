@@ -4,6 +4,7 @@
     <h1 v-text="h1"></h1>
     <h2 v-text="h2"></h2>
     <p v-text="msg"></p>
+    <p>{{ count }}</p>
     <ul>
       <li v-for="item in list">
         <router-link :to="item.url" v-text="item.name"></router-link>
@@ -21,6 +22,7 @@ export default {
       h1: 'Welcome to the remote collaboration team',
       h2: 'Essential Links',
       msg: 'none',
+      count: 23,
       list: [{
           id: 12,
           name: '公会',
@@ -55,6 +57,7 @@ export default {
     }
   },
   mounted: function() {
+    this.count = this.$store.state.count
     /*
     if( this.$store.state.initialize == 0 ){
       // 从页面取数据, 由于每页数据结构不同, 每个组件要取各自的

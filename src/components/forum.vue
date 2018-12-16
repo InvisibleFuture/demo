@@ -52,14 +52,18 @@ export default {
   components: {
     vueWaterfallEasy
   },
-  mounted: function() {
+  created() {
     this.id = this.$route.params.id
+    this.getData()
+ },
+  mounted: function() {
+
   },
   methods: {
     getData() {
       // 替换的方法 , 后端不必再建表存储图像字段, 约定 x1 格式为 data/x1/xxx.webp 文件, 视网膜屏适配 x2, 文件名使用帖子id尽量避免后端输出
-      let server = 'https://xn--uesr8q.com'  //this.$Store.state.server
-      axios.get(server + '/forum-3-' + this.group + '.htm?ajax=1').then(r => {
+      let server = this.$store.state.server.master.domain
+      axios.get(server + '/forum-'+this.id+'-' + this.group + '.htm?ajax=1').then(r => {
 
         // 数据转化, 不必指望后端能输出什么好东西..
         let obj = r.data.message.threadlist
@@ -81,9 +85,6 @@ export default {
         }
       })
     }
-  },
-  created() {
-    this.getData()
   }
 }
 </script>

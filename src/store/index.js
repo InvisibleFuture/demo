@@ -13,7 +13,7 @@ export default new Vuex.Store({
   //strict: debug,
   //plugins: debug ? [createLogger()] : [],
   state: {
-    count: 0,
+    count: 10,
     login: { id: 1, token: '46546546fdasdadas123344' },
     user:[
       { id: 1, name: 'Last', avatar:'/static/u1.jpg', ex: '组关联角色而不是角色关联组' },
