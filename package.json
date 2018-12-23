@@ -14,10 +14,12 @@
     "start-prod": "node server.js"
   },
   "dependencies": {
+    "@toast-ui/vue-editor": "^1.0.2",
     "axios": "^0.18.0",
     "koa": "^2.3.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "tui-editor": "^1.2.8",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

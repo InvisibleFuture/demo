@@ -7,6 +7,10 @@
           <router-link :to="item.url">{{ item.name }}</router-link>
         </li>
       </ul>
+      <ul class="user">
+          <li>msg</li>
+          <li>users</li>
+      </ul>
     </nav>
   </header>
   <!-- img src="./assets/logo.png" -->
