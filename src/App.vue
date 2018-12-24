@@ -9,7 +9,7 @@
       </ul>
       <ul class="user">
         <li><a href="msg">msg 实际是和名字叠加的</a></li>
-        <li>
+        <li :class="{new:msgcount}">
           <a href="user">You name</a>
           <div class="msg">
             <div>
@@ -55,11 +55,24 @@ export default {
           url: 'forum3'
         }
       ],
+      msgcount: 2,
       msg: [{
           id: 12,
           content: "弱小 可怜又无助的 msgBox..",
           time: "5分钟前",
           new: false,
+          user: {
+            id: 2,
+            name: "Last",
+            img: "https://xn--uesr8q.com/upload/preview/131.png",
+            url: "u2"
+          }
+        },
+        {
+          id: 15,
+          content: "用户点击不那么频繁，但是第一请求的数据量较多，花费的时间较长，第二次请求的数据较少，比第一次请求的数据早回来，先显示在界面上，等到第一次的数据回来之后，再把数据显示，就会覆盖掉第二次的显示的数据，这样让用户体验很不好",
+          time: "15分钟前",
+          new: true,
           user: {
             id: 2,
             name: "Last",
@@ -88,7 +101,15 @@ export default {
       if (news) {
         // ajax 通知服务器, 或许可以设置一个记录池, 3s内不发送, 以降低连接数?
         console.log(id)
+        // 每次读队列减少阅读计数
+        this.msgcount--
+        console.log(this.msgcount)
       }
+    },
+    msgloading() {
+      // websoker 长连接更新消息队列
+      // 每次入队列增加未读计数
+      this.msgcount++
     }
   }
 }
@@ -192,7 +213,7 @@ a:active {
                             }
                             > div {
                                 width: 100%;
-                                padding-left: 1rem;
+                                padding-left: 8px;
                                 p {
                                     color: #ffeeee;
                                 }
@@ -227,6 +248,16 @@ a:active {
                     background: rgba(50,50,50,.9);
                     transition: all 0.2s linear;
                 }
+            }
+            > li.new::before {
+                content: "";
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: #c0ffee;
+                position: absolute;
+                right: 8px;
+                top: 12px;
             }
         }
 
