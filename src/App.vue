@@ -8,7 +8,6 @@
         </li>
       </ul>
       <ul class="user">
-        <li><a href="msg">msg 实际是和名字叠加的</a></li>
         <li :class="{new:msgcount}">
           <a href="user">You name</a>
           <div class="msg">
@@ -52,7 +51,7 @@ export default {
         {
           id: 666,
           name: 'collect',
-          url: 'forum3'
+          url: 'list3'
         }
       ],
       msgcount: 2,
@@ -181,10 +180,11 @@ a:active {
                     border-radius: 50%;
                 }
                 div.msg {
-                    // 相对父元素的绝对定位
+                    // 相对父元素的绝对定位 ?
                     position: absolute;
-                    //visibility:hidden;
-                    left: -50%;
+                    visibility:hidden;
+                    opacity: 0;
+                    right: -50%;
                     top: 50px;
                     width: 300px;
                     //height: 0px;
@@ -252,10 +252,11 @@ a:active {
             }
             > li:hover {
                 // 弹出 msg and setting
-                background: #ff1414;
+                //background: #ff1414;
                 div.msg {
                     visibility: visible;
                     //height: 400px;
+                    opacity: 1;
                     background: rgba(50,50,50,.9);
                     transition: all 0.2s linear;
                 }
