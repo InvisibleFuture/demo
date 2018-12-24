@@ -8,15 +8,30 @@
         </li>
       </ul>
       <ul class="user">
-          <li>msg</li>
-          <li>users</li>
+        <li><a href="msg">msg 实际是和名字叠加的</a></li>
+        <li>
+          <a href="user">You name</a>
+          <div class="msg">
+            <p>弱小又无助的 msg</p>
+            <ul>
+              <li>
+                <img src="https://xn--uesr8q.com/upload/preview/131.png">
+                <div>
+                  <p>wolege.. Welcome to the remote collaboration team</p>
+                  <a href="u19332">Last</a>
+                  <time>3分钟前</time>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>
   <!-- img src="./assets/logo.png" -->
   <main id="main">
     <transition name="fade">
-    <router-view />
+      <router-view />
     </transition>
   </main>
 </div>
@@ -86,8 +101,84 @@ a:active {
     nav {
         display: flex;
         width: 1000px;
+        > ul.user {
+            flex: 1;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            > li {
+                float: right;
+                position: relative; // 为了让 msgbox 使用绝对定位
+                > a {
+                    display: block;
+                    padding: 1.5rem;
+                    color: #fff;
+                    border-radius: 3px;
+                    text-decoration: none;
+                    transition: all 0.3s linear;
+                }
 
-        ul {
+                > img {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                }
+                div.msg {
+                    // 相对父元素的绝对定位
+                    position: absolute;
+                    //visibility:hidden;
+                    left: -50%;
+                    top: 50px;
+                    width: 300px;
+                    //height: 0px;
+                    z-index: 9999;
+                    border-radius: 0 0 3px 3px;
+                    background: rgba(50,50,50,1);
+                    transition: all 0.2s linear;
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                        li {
+                            padding: 1rem;
+                            //background: #ccc;
+                            display: flex;
+                            //justify-content: center;
+                            > img {
+                                width: 32px;
+                                height: 32px;
+                                border-radius: 50%;
+                            }
+                            > div {
+                                padding-left: 1rem;
+                                p {
+                                    color: #ffeeee;
+                                }
+                                a {
+                                    color: #cceeee;
+                                }
+                                time {
+                                    color: #999;
+                                    padding-left: 1rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            > li:hover {
+                // 弹出 msg and setting
+                background: #ff1414;
+                div.msg {
+                    visibility: visible;
+                    //height: 400px;
+                    background: rgba(50,50,50,.8);
+                    transition: all 0.2s linear;
+                }
+            }
+        }
+
+        ul.nav {
             flex: 1;
             list-style: none;
             margin: 0;
@@ -121,18 +212,6 @@ a:active {
             display: block;
             clear: both;
         }
-
-        ul.user {
-            li {
-                float: right;
-
-                img {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                }
-            }
-        }
     }
     .logo {
         font-size: 1rem;
@@ -142,8 +221,7 @@ a:active {
     }
 }
 
-#main {
-}
+#main {}
 
 #footer {
     display: none;
