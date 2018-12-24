@@ -12,16 +12,18 @@
         <li>
           <a href="user">You name</a>
           <div class="msg">
-            <p>弱小又无助的 msg</p>
+            <div>
+              <span>清空记录</span>
+            </div>
             <ul>
-              <li>
-                <img src="https://xn--uesr8q.com/upload/preview/131.png">
-                <div>
-                  <p>wolege.. Welcome to the remote collaboration team</p>
-                  <a href="u19332">Last</a>
-                  <time>3分钟前</time>
-                </div>
-              </li>
+                <li v-for="item in msg" :class="{new:item.new}">
+                    <img :src="item.user.img">
+                    <div>
+                        <p v-text="item.content"></p>
+                        <a v-text="item.user.name" :href="item.user.url"></a>
+                        <time v-text="item.time"></time>
+                    </div>
+                </li>
             </ul>
           </div>
         </li>
@@ -51,6 +53,31 @@ export default {
           id: 666,
           name: 'collect',
           url: 'forum3'
+        }
+      ],
+      msg: [{
+          id: 12,
+          content: "弱小 可怜又无助的 msgBox..",
+          time: "5分钟前",
+          new: false,
+          user: {
+              id: 2,
+              name: "Last",
+              img: "https://xn--uesr8q.com/upload/preview/131.png",
+              url: "u2"
+          }
+        },
+        {
+          id: 13,
+          content: "wo.. Welcome to the remote collaboration team",
+          time: "5分钟前",
+          new: true,
+          user: {
+              id: 2,
+              name: "Last",
+              img: "https://xn--uesr8q.com/upload/preview/131.png",
+              url: "u2"
+          }
         }
       ]
     }
@@ -135,21 +162,27 @@ a:active {
                     border-radius: 0 0 3px 3px;
                     background: rgba(50,50,50,1);
                     transition: all 0.2s linear;
-                    ul {
+                    > div {
+                        color: #555;
+                        padding: 5px 5px 0 0;
+                        text-align: right;
+                    }
+                    > ul {
                         margin: 0;
                         padding: 0;
+                        max-height: 700px;
                         list-style: none;
-                        li {
+                        > li {
                             padding: 1rem;
-                            //background: #ccc;
                             display: flex;
-                            //justify-content: center;
+                            position: relative;
                             > img {
                                 width: 32px;
                                 height: 32px;
                                 border-radius: 50%;
                             }
                             > div {
+                                width:100%;
                                 padding-left: 1rem;
                                 p {
                                     color: #ffeeee;
@@ -163,6 +196,16 @@ a:active {
                                 }
                             }
                         }
+                        > li.new::before {
+                            content: "";
+                            width: 5px;
+                            height: 5px;
+                            border-radius: 50%;
+                            background: #c0ffee;
+                            position: absolute;
+                            right: 8px;
+                            top: 12px;
+                        }
                     }
                 }
             }
@@ -172,7 +215,7 @@ a:active {
                 div.msg {
                     visibility: visible;
                     //height: 400px;
-                    background: rgba(50,50,50,.8);
+                    background: rgba(50,50,50,.9);
                     transition: all 0.2s linear;
                 }
             }
