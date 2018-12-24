@@ -17,7 +17,9 @@ export function createRouter () {
       { path: '/list:id', name: 'forum', component: () => import('@/components/forum') },
       //{ path: '/u:id', name: 'U', component: () => import('@/components/U') },
       //{ path: '/forum-:id.htm', name: 'forum', component: resolve => require(['@/components/forum'],resolve) },
-      { path: '/p:id', name: 'thread', component: resolve => require(['@/components/thread'],resolve) }
+      { path: '/p:id', name: 'thread', component: () => import('@/components/thread') },
+      { path: '/404', name: '404', component: () => import('@/components/404') },
+      { path: '*', redirect: '/404' }
     ]
   })
 }
