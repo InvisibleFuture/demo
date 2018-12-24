@@ -206,6 +206,7 @@ a:active {
                             padding: 1rem;
                             display: flex;
                             position: relative;
+                            transition: all 0.2s linear;
                             > img {
                                 width: 32px;
                                 height: 32px;
@@ -226,7 +227,11 @@ a:active {
                                 }
                             }
                         }
-                        > li.new::before {
+                        > li:hover {
+                            background: rgba(50,50,50,.4);
+                            transition: all 0.2s linear;
+                        }
+                        > li::before {
                             content: "";
                             width: 5px;
                             height: 5px;
@@ -235,6 +240,12 @@ a:active {
                             position: absolute;
                             right: 8px;
                             top: 12px;
+                            opacity: 0;
+                            transition: all 0.2s linear;
+                        }
+                        > li.new::before {
+                            opacity: 1;
+                            transition: all 0.2s linear;
                         }
                     }
                 }
@@ -249,7 +260,7 @@ a:active {
                     transition: all 0.2s linear;
                 }
             }
-            > li.new::before {
+            > li::before {
                 content: "";
                 width: 5px;
                 height: 5px;
@@ -258,6 +269,12 @@ a:active {
                 position: absolute;
                 right: 8px;
                 top: 12px;
+                opacity: 0;
+                transition: all 0.2s linear;
+            }
+            > li.new::before {
+                opacity: 1;
+                transition: all 0.2s linear;
             }
         }
 
