@@ -16,14 +16,14 @@
               <span>清空记录</span>
             </div>
             <ul>
-                <li v-for="item in msg" :class="{new:item.new}">
-                    <img :src="item.user.img">
-                    <div>
-                        <p v-text="item.content"></p>
-                        <a v-text="item.user.name" :href="item.user.url"></a>
-                        <time v-text="item.time"></time>
-                    </div>
-                </li>
+              <li v-for="item in msg" :class="{new:item.new}" v-on:mouseover="reading(item.id,item.new);item.new=false">
+                <img :src="item.user.img">
+                <div>
+                  <p v-text="item.content"></p>
+                  <a v-text="item.user.name" :href="item.user.url"></a>
+                  <time v-text="item.time"></time>
+                </div>
+              </li>
             </ul>
           </div>
         </li>
@@ -61,10 +61,10 @@ export default {
           time: "5分钟前",
           new: false,
           user: {
-              id: 2,
-              name: "Last",
-              img: "https://xn--uesr8q.com/upload/preview/131.png",
-              url: "u2"
+            id: 2,
+            name: "Last",
+            img: "https://xn--uesr8q.com/upload/preview/131.png",
+            url: "u2"
           }
         },
         {
@@ -73,13 +73,22 @@ export default {
           time: "5分钟前",
           new: true,
           user: {
-              id: 2,
-              name: "Last",
-              img: "https://xn--uesr8q.com/upload/preview/131.png",
-              url: "u2"
+            id: 2,
+            name: "Last",
+            img: "https://xn--uesr8q.com/upload/preview/131.png",
+            url: "u2"
           }
         }
       ]
+    }
+  },
+  methods: {
+    // 阅读消息时将转变为已阅状态的消息反馈给服务器, 注意必须异步执行
+    async reading(id, news) {
+      if (news) {
+        // ajax 通知服务器, 或许可以设置一个记录池, 3s内不发送, 以降低连接数?
+        console.log(id)
+      }
     }
   }
 }
@@ -182,7 +191,7 @@ a:active {
                                 border-radius: 50%;
                             }
                             > div {
-                                width:100%;
+                                width: 100%;
                                 padding-left: 1rem;
                                 p {
                                     color: #ffeeee;
