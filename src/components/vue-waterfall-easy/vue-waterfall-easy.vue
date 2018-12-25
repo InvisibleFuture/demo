@@ -204,7 +204,6 @@
             <!--
               <div slot="waterfall-head">waterfall-head</div>
             -->
-            <!--  -->
           </div>
         </div>
         <div class="over" v-if="over" ref="over">
