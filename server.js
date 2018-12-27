@@ -26,7 +26,7 @@ app.use(require('koa-static')(resolve('./dist')))
 app.use(async (ctx, next) => {
   try {
     const context = {
-      title: '服务端渲染测试', // default title
+      title: 'Misaka', // default title
       url: ctx.url
     }
     // 将服务器端渲染好的html返回给客户端

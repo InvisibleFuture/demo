@@ -75,7 +75,7 @@
           </div>
         </li>
         <li v-if="login">
-          <div><img :src="first.user.user_avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username"></div>
+          <div><img :src="first.user.avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username"></div>
           <div>
             <div id="textarea" v-text="textarea" contenteditable="true"></div>
             <div id="textareas">
@@ -94,7 +94,7 @@
     <!-- Component : author information -->
     <div class="author" @click.stop>
       <div class="user_head_div">
-        <img :src="first.user.user_avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username">
+        <img :src="first.user.avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username">
         <div class="ie2">
           <p>
             <span onclick="gotoUserPage('/user6294360860113072660')">{{ first.user.username }}</span>
