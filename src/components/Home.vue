@@ -46,7 +46,7 @@ export default {
           id: 12,
           name: '角色',
           msg: '用户担当的角色',
-          url: 'user'
+          url: '0user'
         },
         {
           id: 12,
