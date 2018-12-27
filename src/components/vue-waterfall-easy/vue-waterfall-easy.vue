@@ -191,11 +191,11 @@
               </p>
 
               <div class="convo attribution clearfix">
-                <a href="/zhangxingwei3158/" title="hMRnl_幻" rel="nofollow" class="img x"><img src="static/u1.jpg" data-baiduimageplus-ignore="1" class="avt"></a>
+                <a :href="v.user.id" :title="v.user.name" rel="nofollow" class="img x"><img :src="v.user.img" data-baiduimageplus-ignore="1" class="avt"></a>
                 <div class="text">
                   <div class="inner">
-                    <div class="line"><a href="/we8/" rel="" class="author x" v-text="v.name"></a>&nbsp;发表到</div>
-                    <div class="line"><a href="/boards/3926222/" rel="" class="x" v-text="v.part"></a></div>
+                    <div class="line"><a :href="v.user.id" rel="" class="author x" v-text="v.user.name"></a>&nbsp;发表到</div>
+                    <div class="line"><a :href="v.list.id" rel="" class="x" v-text="v.list.name"></a></div>
                     <a title="评论" class="replyButton"></a>
                   </div>
                 </div>

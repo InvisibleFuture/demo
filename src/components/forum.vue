@@ -1,15 +1,12 @@
 <template>
 <div id="forum">
-  <!---->
   <vue-waterfall-easy :imgsArr="imgsArr" :end="end" @scrollReachBottom="getData">
   </vue-waterfall-easy>
-
-    yayayayaya
 </div>
 </template>
 
 <script>
-//import vueWaterfallEasy from './vue-waterfall-easy/vue-waterfall-easy.vue' // 瀑布流
+import vueWaterfallEasy from './vue-waterfall-easy/vue-waterfall-easy.vue' // 瀑布流
 import axios from 'axios'
 
 export default {
@@ -26,8 +23,8 @@ export default {
     }
   },
   components: {
-    //vueWaterfallEasy
-    'vueWaterfallEasy': () => import('./vue-waterfall-easy/vue-waterfall-easy')
+    vueWaterfallEasy
+    //'vueWaterfallEasy': () => import('./vue-waterfall-easy/vue-waterfall-easy')
   },
   created() {
   },
@@ -48,7 +45,16 @@ export default {
           arr.push({
             id: obj[item].tid,
             src: server + '/upload/preview/' + obj[item].tid + ".png",
-            info: obj[item].subject
+            info: obj[item].subject,
+            user: {
+                id: 1,
+                name: 'Last',
+                img: 'https://avatars3.githubusercontent.com/u/32554200?s=460&v=4',
+            },
+            list:{
+                id: 3,
+                name: 'R17.5'
+            }
           })
         }
 

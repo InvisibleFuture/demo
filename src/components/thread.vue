@@ -75,12 +75,12 @@
           </div>
         </li>
         <li v-if="login">
-          <div><img src="static/u1.jpg" onclick="gotoUserPage('/user6294360860113072660')" alt="first.user.username"></div>
+          <div><img :src="first.user.user_avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username"></div>
           <div>
             <div id="textarea" v-text="textarea" contenteditable="true"></div>
             <div id="textareas">
               <button title="Alt + Enter">回复</button>
-              <span>字数 63 / 1024</span>
+              <span>1 / 1024</span>
             </div>
           </div>
         </li>
@@ -94,7 +94,7 @@
     <!-- Component : author information -->
     <div class="author" @click.stop>
       <div class="user_head_div">
-        <img src="static/u1.jpg" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username">
+        <img :src="first.user.user_avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username">
         <div class="ie2">
           <p>
             <span onclick="gotoUserPage('/user6294360860113072660')">{{ first.user.username }}</span>
