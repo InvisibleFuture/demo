@@ -31,7 +31,7 @@
   </header>
   <!-- img src="./assets/logo.png" -->
   <main id="main">
-    <transition name="fade">
+    <transition name="fade" mode="out-in">
       <router-view />
     </transition>
   </main>
@@ -182,7 +182,7 @@ a:active {
                 div.msg {
                     // 相对父元素的绝对定位 ?
                     position: absolute;
-                    visibility:hidden;
+                    visibility: hidden;
                     opacity: 0;
                     right: -50%;
                     top: 50px;
@@ -279,12 +279,28 @@ a:active {
             }
         }
 
+        //ul.nav:hover {
+        //    // 为 list 增加 demo 标志
+        //    > li:nth-child(2){
+        //        position: relative;
+        //    }
+        //    > li:nth-child(2)::after {
+        //        content: 'beta';
+        //        background: #cc1414;
+        //        position: absolute;
+        //        left: 45px;
+        //        top: 5px;
+        //        font-size: 4px;
+        //        border-radius: 3px;
+        //        padding: 0 3px;
+        //    }
+        //}
+
         ul.nav {
             flex: 1;
             list-style: none;
             margin: 0;
             padding: 0;
-
             li {
                 float: left;
                 padding: 0;

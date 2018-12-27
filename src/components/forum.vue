@@ -1,12 +1,15 @@
 <template>
 <div id="forum">
+  <!---->
   <vue-waterfall-easy :imgsArr="imgsArr" :end="end" @scrollReachBottom="getData">
   </vue-waterfall-easy>
+
+    yayayayaya
 </div>
 </template>
 
 <script>
-import vueWaterfallEasy from './vue-waterfall-easy/vue-waterfall-easy.vue' // 瀑布流
+//import vueWaterfallEasy from './vue-waterfall-easy/vue-waterfall-easy.vue' // 瀑布流
 import axios from 'axios'
 
 export default {
@@ -14,34 +17,7 @@ export default {
   data() {
     return {
       id: 1,
-      imgsArr: [
-          /*
-          {id:1, src:'static/collect/x1/1.png', info:'466456', name:'Last', avg:'static/u1.jpg', part:'collect', parturl:'/'},
-          {id:2, src:'static/collect/x1/2.png', info:'466456', name:'Last', part:'collect'},
-          {id:3, src:'static/collect/x1/3.png', info:'466456', name:'Last', part:'collect'},
-          {id:4, src:'static/collect/x1/4.png', info:'466456', name:'Last', part:'collect'},
-          {id:5, src:'static/collect/x1/5.png', info:'466456', name:'Last', part:'collect'},
-          {id:6, src:'static/collect/x1/6.png', info:'466456', name:'Last', part:'collect'},
-          {id:7, src:'static/collect/x1/7.png', info:'466456', name:'Last', part:'collect'},
-          {id:8, src:'static/collect/x1/8.png', info:'466456', name:'Last', part:'collect'},
-          {id:9, src:'static/collect/x1/9.png', info:'466456', name:'Last', part:'collect'},
-          {id:10, src:'static/collect/x110.png', info:'466456', name:'Last', part:'collect'},
-          {id:11, src:'static/collect/x1/11.png', info:'466456', name:'Last', part:'collect'},
-          {id:12, src:'static/collect/x1/12.png', info:'466456', name:'Last', part:'collect'},
-          {id:13, src:'static/collect/x1/13.png', info:'466456', name:'Last', part:'collect'},
-          {id:14, src:'static/collect/x1/14.png', info:'466456', name:'Last', part:'collect'},
-          {id:15, src:'static/collect/x1/15.png', info:'466456', name:'Last', part:'collect'},
-          {id:16, src:'static/collect/x1/16.png', info:'466456', name:'Last', part:'collect'},
-          {id:17, src:'static/collect/x1/17.png', info:'466456', name:'Last', part:'collect'},
-          {id:18, src:'static/collect/x1/18.png', info:'466456', name:'Last', part:'collect'},
-          {id:19, src:'static/collect/x1/19.png', info:'466456', name:'Last', part:'collect'},
-          {id:20, src:'static/collect/x1/20.png', info:'466456', name:'Last', part:'collect'},
-          {id:21, src:'static/collect/x1/21.png', info:'466456', name:'Last', part:'collect'},
-          {id:22, src:'static/collect/x1/22.png', info:'466456', name:'Last', part:'collect'},
-          {id:23, src:'static/collect/x1/23.png', info:'466456', name:'Last', part:'collect'},
-          {id:24, src:'static/collect/x1/24.png', info:'466456', name:'Last', part:'collect'}
-          */
-      ],
+      imgsArr: [],
       group: 1, // request param
       end: false, // 是否已经到底.......
       maxpage: 2,
@@ -50,14 +26,14 @@ export default {
     }
   },
   components: {
-    vueWaterfallEasy
+    //vueWaterfallEasy
+    'vueWaterfallEasy': () => import('./vue-waterfall-easy/vue-waterfall-easy')
   },
   created() {
-    this.id = this.$route.params.id
-    this.getData()
- },
+  },
   mounted: function() {
-
+      this.id = this.$route.params.id
+      this.getData()
   },
   methods: {
     getData() {

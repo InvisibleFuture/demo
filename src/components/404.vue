@@ -29,7 +29,7 @@ export default {
         color: #555;
     }
     p {
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: #555;
     }
 }

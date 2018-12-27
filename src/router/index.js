@@ -18,6 +18,9 @@ export function createRouter () {
       //{ path: '/u:id', name: 'U', component: () => import('@/components/U') },
       //{ path: '/forum-:id.htm', name: 'forum', component: resolve => require(['@/components/forum'],resolve) },
       { path: '/p:id', name: 'thread', component: () => import('@/components/thread') },
+      { path: '/guild', name: 'guild', component: () => import('@/components/guild') },
+      { path: '/team', name: 'team', component: () => import('@/components/team') },
+      { path: '/user', name: 'user', component: () => import('@/components/user') },
       { path: '/404', name: '404', component: () => import('@/components/404') },
       { path: '*', redirect: '/404' }
     ]
