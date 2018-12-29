@@ -20,6 +20,7 @@ export function createRouter () {
       { path: '/p:id', name: 'thread', component: () => import('@/components/thread') },
       { path: '/guild', name: 'guild', component: () => import('@/components/guild') },
       { path: '/team', name: 'team', component: () => import('@/components/team') },
+      { path: '/structure', name: 'structure', component: () => import('@/components/structure') },
       //{ path: '/user', name: 'user', component: () => import('@/components/user') },
       { path: '/404', name: '404', component: () => import('@/components/404') },
       { path: '*', redirect: '/404' }

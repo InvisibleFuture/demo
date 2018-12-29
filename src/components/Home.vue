@@ -1,16 +1,76 @@
 <template>
-<div id="hello">
-  <div class="cent">
-    <h1 v-text="h1"></h1>
-    <h2 v-text="h2"></h2>
-    <p v-text="msg"></p>
-    <p>{{ count }}</p>
-    <ul>
-      <li v-for="item in list">
-        <router-link :to="item.url" v-text="item.name"></router-link>
-      </li>
-    </ul>
+<div id="home">
+
+  <div id="hello">
+    <div class="cent">
+      <h1 v-text="h1"></h1>
+      <h2 v-text="h2"></h2>
+      <br>
+      <ul>
+        <li v-for="item in list">
+          <router-link :to="item.url" v-text="item.name"></router-link>
+        </li>
+      </ul>
+    </div>
   </div>
+
+  <div class="conte">
+    <h2># 远程协作</h2><br>
+    <p></p>
+    <br>
+
+    <h2># 程序架构</h2><br>
+    <h3>Client</h3>
+    <p>
+      WEB(vue) | Android | IOS | Windows | Linux<br>
+      Router {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;www.xxx.com:8080<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;G:id > Gulid<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;T:id > Team<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;U:id > User<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;P:id > Project<br>
+      }<br>
+      <br>
+    </p>
+    <h3>Server</h3>
+    <p>
+      Golang | php | node | java <br>
+      API {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;www.xxx.com:8000<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;/API? package=user, id=2<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;/API? T=x,x,x,x,x<br>
+      },<br>
+      IMG {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;img.xxx.com<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;5785924792387.webp?x=2<br>
+      },<br>
+      File {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;file.xxx.com<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;4382746832742.zip<br>
+      }<br>
+      <br>
+    </p>
+    <h3>cache / redis</h3>
+    <p>
+      (1)token > key:id, value:token, time:30d<br>
+      <br>
+    </p>
+
+    <h3>database / nosql</h3>
+    <p>
+      Guild > id name info [100]user.id<br>
+    </p>
+    <p>
+      Team > id name info [20]user.id<br>
+    </p>
+    <p>
+      User > id name info img
+    </p>
+    <p>
+      Project > id name info list..
+    </p>
+  </div>
+
   <div id="home_footer">
     <a aria-label="Homepage" title="GitHub" class="footer-octicon mr-lg-4" href="https://github.com">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24" aria-hidden="true">
@@ -18,6 +78,7 @@
       </svg>
     </a>
   </div>
+
 </div>
 </template>
 
@@ -59,6 +120,12 @@ export default {
           name: '领域',
           msg: '区域地图',
           url: '0project'
+        },
+        {
+          id: 12,
+          name: '架构',
+          msg: '组织架构',
+          url: 'structure'
         }
       ]
     }
@@ -118,13 +185,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
+#home .conte {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px;
+
+}
 #home_footer {
-    position: fixed;
-    bottom: 0;
+    //position: fixed;
+    //bottom: 0;
     width: 100%;
     height: 50px;
     text-align: center;
-    opacity: 0.6
+    opacity: 0.6;
 }
 #hello {
     height: 320px;
