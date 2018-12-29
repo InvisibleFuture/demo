@@ -2,9 +2,11 @@
 <div id="team">
     <h1 v-text="title"></h1>
     <p v-text="msg"></p>
+    <!--
     <ul>
         <li v-for="r in list" v-text="r.msg"></li>
     </ul>
+    -->
 </div>
 </template>
 
