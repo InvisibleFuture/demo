@@ -89,7 +89,7 @@ a:active {
 }
 
 html,body {
-    height: 100%;
+    min-height: 100%;
 }
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -97,7 +97,7 @@ html,body {
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     background: rgba(248, 249, 251, 1);
-    height: 100%;
+    min-height: 100%;
 }
 
 #header {
