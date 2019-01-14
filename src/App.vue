@@ -39,6 +39,11 @@ export default {
           id: 666,
           name: 'collect',
           url: 'list3'
+        },
+        {
+            id: 666,
+            name: 'project',
+            url: 'project'
         }
       ]
     }
@@ -88,7 +93,8 @@ a:active {
     opacity: 0;
 }
 
-html,body {
+body,
+html {
     min-height: 100%;
 }
 #app {
@@ -110,7 +116,6 @@ html,body {
     nav {
         display: flex;
         width: 1000px;
-
 
         //ul.nav:hover {
         //    // 为 list 增加 demo 标志

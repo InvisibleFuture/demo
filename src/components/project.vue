@@ -9,11 +9,16 @@
               <p v-text="r.name"></p>
               <span>Last</span>
               <time v-text="r.time"></time>
+              <span v-if="r.situation == 1">构建/招募</span>
+              <span v-if="r.situation == 2">运作/稳定</span>
+              <span v-if="r.situation == 3">终止/成功</span>
+              <span v-if="r.situation == 4">终止/失败</span>
           </router-link>
       </li>
     </ul>
   </div>
-
+想法/创意 - 探讨 验证 立项 失败
+项目重启
   <div id="home_footer">
     <a aria-label="Homepage" title="GitHub" class="footer-octicon mr-lg-4" href="https://github.com">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24" aria-hidden="true">
@@ -31,12 +36,12 @@ export default {
   data() {
     return {
       plist:[
-          {name:'New project test', url:'p21', time:'12-29 AM10:53'},
-          {name:'New project test', url:'p21', time:'12-29 AM10:54'},
-          {name:'New project test', url:'p21', time:'12-29 AM10:55'},
-          {name:'New project test', url:'p21', time:'12-29 AM10:55'},
-          {name:'New project test', url:'p21', time:'12-29 AM10:58'},
-          {name:'New project test', url:'p21', time:'12-29 AM10:59'}
+          {name:'New project test', url:'project21', time:'12-29 AM10:53', situation:1},
+          {name:'New project test', url:'project21', time:'12-29 AM10:54', situation:1},
+          {name:'New project test', url:'project21', time:'12-29 AM10:55', situation:2},
+          {name:'New project test', url:'project21', time:'12-29 AM10:55', situation:2},
+          {name:'New project test', url:'project21', time:'12-29 AM10:58', situation:3},
+          {name:'New project test', url:'project21', time:'12-29 AM10:59', situation:1}
       ],
       h1: 'Welcome to the remote collaboration team',
       h2: 'Essential Links',

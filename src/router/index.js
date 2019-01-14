@@ -16,6 +16,7 @@ export function createRouter () {
       { path: '/team', name: 'team', component: () => import('@/components/team') },
       { path: '/structure', name: 'structure', component: () => import('@/components/structure') },
       { path: '/project', name: 'project', component: () => import('@/components/project') },
+      { path: '/project:id', name: 'projects', component: () => import('@/components/projects') },
       //{ path: '/user', name: 'user', component: () => import('@/components/user') },
 
       { path: '/p:id', name: 'thread', component: () => import('@/components/thread') },

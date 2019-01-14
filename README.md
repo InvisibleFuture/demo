@@ -16,3 +16,14 @@ npm run start-prod
 #或者
 node server.js
 ```
+
+Guild
+Team
+User
+
+MSG
+
+use GPX
+GGD
+
+项目状态 失败总结
