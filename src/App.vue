@@ -42,9 +42,24 @@ export default {
         },
         {
             id: 666,
+            name: 'idea',
+            url: 'idea'
+        },
+        {
+            id: 666,
             name: 'project',
             url: 'project'
-        }
+        },
+        {
+            id: 666,
+            name: 'team',
+            url: 'team'
+        },
+        {
+            id: 666,
+            name: 'guild',
+            url: 'guild'
+        },
       ]
     }
   }

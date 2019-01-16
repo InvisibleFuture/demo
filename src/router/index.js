@@ -14,10 +14,12 @@ export function createRouter () {
       { path: '/test', name: 'Test', component: () => import('@/components/Test') },
       { path: '/guild', name: 'guild', component: () => import('@/components/guild') },
       { path: '/team', name: 'team', component: () => import('@/components/team') },
-      { path: '/structure', name: 'structure', component: () => import('@/components/structure') },
+      { path: '/team:id', name: 'teams', component: () => import('@/components/teams') },
+      { path: '/idea', name: 'idea', component: () => import('@/components/idea') },
       { path: '/project', name: 'project', component: () => import('@/components/project') },
       { path: '/project:id', name: 'projects', component: () => import('@/components/projects') },
       //{ path: '/user', name: 'user', component: () => import('@/components/user') },
+      { path: '/structure', name: 'structure', component: () => import('@/components/structure') },
 
       { path: '/p:id', name: 'thread', component: () => import('@/components/thread') },
       { path: '/lists:id', name: 'List', component: () => import('@/components/List') },

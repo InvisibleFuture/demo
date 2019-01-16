@@ -5,6 +5,9 @@
 ## Build Setup
 
 ``` bash
+
+node.js version 8+
+
 # install dependencies
 npm install
 
@@ -27,3 +30,12 @@ use GPX
 GGD
 
 项目状态 失败总结
+项目分析 分配人数
+
+现有项目
+# 远程协作平台
+    远程协作, 组队招募, 公会组, 非约定的/基于本质信任的
+
+# 自动化项目组
+
+# GP

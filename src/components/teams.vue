@@ -1,5 +1,5 @@
 <template>
-<div id="team">
+<div id="teams">
     <h1 v-text="title"></h1>
     <p v-text="msg"></p>
     <p>
@@ -9,7 +9,7 @@
     </p>
     <ul>
         <li v-for="r in list">
-            <a :href="'team'+r.id">
+            <router-link :to="'team'+r.id">
             <div>
                 <p>招募说明或条件列表</p>
                 <p>招募说明或条件列表</p>
@@ -20,7 +20,7 @@
                 <span>2/39 剩余招募人数/应募人数</span>
                 <span>2/39 当前公会规模</span>
             </div>
-            </a>
+            </router-link>
         </li>
     </ul>
 </div>
@@ -28,10 +28,10 @@
 
 <script>
 export default {
-  name: 'team',
+  name: 'teams',
   data () {
     return {
-      title: 'Team',
+      title: 'Teams',
       msg: '没有新的组队..',
       list:[
           {id:32, name:"苦涩砂糖"},
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="less">
-#team {
+#teams {
     padding: 30px;
     min-height: 600px;
     text-align: center;
