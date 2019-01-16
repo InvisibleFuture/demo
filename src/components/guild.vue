@@ -1,5 +1,5 @@
 <template>
-<div id="team">
+<div id="guild">
     <h1 v-text="title"></h1>
     <p v-text="msg"></p>
     <p>
@@ -23,7 +23,7 @@ export default {
   name: 'guild',
   data () {
     return {
-      title: 'Guild',
+      title: '旅途',
       msg: '没有新的公会..',
       list:[
           {msg:'任何人都可以创建自己的公会'},
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="less">
-#team {
+#guild {
     padding: 30px;
     min-height: 600px;
     text-align: center;

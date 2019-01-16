@@ -50,11 +50,11 @@ export default {
             name: 'project',
             url: 'project'
         },
-        {
-            id: 666,
-            name: 'team',
-            url: 'team'
-        },
+        //{
+        //    id: 666,
+        //    name: 'team',
+        //    url: 'team'
+        //},
         {
             id: 666,
             name: 'guild',

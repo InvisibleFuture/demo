@@ -5,11 +5,12 @@
     <p>
         是项目组系统<br>
         项目组可以直接对外招募<br>
-        排行榜不在主文档, 额外附加
+        排行榜不在主文档, 额外附加<br>
+        组集成到项目中吗, 无需额外页面
     </p>
     <ul>
         <li v-for="r in list">
-            <router-link :to="'team'+r.id">
+            <router-link :to="{ name: 'team', params: {id:r.id} }">
             <div>
                 <p>招募说明或条件列表</p>
                 <p>招募说明或条件列表</p>

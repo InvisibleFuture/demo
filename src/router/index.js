@@ -18,7 +18,7 @@ export function createRouter () {
       { path: '/team:id', name: 'team', component: () => import('@/components/team') },
       { path: '/idea', name: 'idea', component: () => import('@/components/idea') },
       { path: '/project', name: 'project', component: () => import('@/components/project') },
-      { path: '/project:id', name: 'projects', component: () => import('@/components/projects') },
+      { path: '/project:id', name: 'projectN', component: () => import('@/components/projectN') },
       //{ path: '/user', name: 'user', component: () => import('@/components/user') },
       { path: '/structure', name: 'structure', component: () => import('@/components/structure') },
 
