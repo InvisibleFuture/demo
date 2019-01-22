@@ -1,101 +1,285 @@
 <template>
-<div id="project">
-
-  <div class="list">
-    <ul>
-      <li v-for="r in plist">
-          <img src="https://xn--uesr8q.com/upload/preview/131.png">
-          <router-link :to="r.url">
-              <p v-text="r.name"></p>
-              <span>Last</span>
-              <time v-text="r.time"></time>
-              <span v-if="r.situation == 1">构建/招募</span>
-              <span v-if="r.situation == 2">运作/稳定</span>
-              <span v-if="r.situation == 3">终止/成功</span>
-              <span v-if="r.situation == 4">终止/失败</span>
-          </router-link>
-      </li>
-    </ul>
+<div id="forum">
+  <!-- 浮层 -->
+  <div v-if="layer" v-focus id="layer" tabindex="-1" @click="layer_off" @keyup.esc="layer_off" style="position:fixed;
+    left:0;
+    top:0;
+    right:0;
+    bottom: 0;
+    z-index:10;
+    background:rgba(240,239,240,.9);
+    overflow-y:scroll;
+    overflow-x:hidden;
+    outline:none;
+    /*cursor: crosshair;*/
+    ">
+    <item></item>
   </div>
 
-  <p v-text="h2"></p>
-想法/创意 - 探讨 验证 立项 失败
-项目重启
-  <div id="home_footer">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon mr-lg-4" href="https://github.com">
-      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24" aria-hidden="true">
-        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-      </svg>
-    </a>
-  </div>
+  <!-- 表层 -->
+  <ul class="list">
+    <li v-for="r in list">
+      <img src="https://xn--uesr8q.com/upload/preview/131.png">
+      <!-- 注意此处不使用 router-link, 由于要对链接拦截并在本页显示-->
+      <a :href="'p'+r.id" :data-id="r.id" @click.stop="layer_on">
+        <p v-text="r.name"></p>
+        <p>
+        <span>Last</span>
+        <time v-text="r.time"></time>
+        <span v-if="r.situation == 1">构建/招募</span>
+        <span v-if="r.situation == 2">运作/稳定</span>
+        <span v-if="r.situation == 3">终止/成功</span>
+        <span v-if="r.situation == 4">终止/失败</span>
+        </p>
+      </a>
+    </li>
+  </ul>
 
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'project',
+  name: 'idea',
+  components: {
+    // 动态引入组件们
+    'item': () => import('./guild.vue')
+  },
   data() {
     return {
-      plist:[
-          {name:'基于ACK的', url:'project21', time:'12-29 AM10:53', situation:1},
-          {name:'ididid', url:'project21', time:'12-29 AM10:54', situation:1},
-          {name:'New project test', url:'project21', time:'12-29 AM10:55', situation:2},
-          {name:'New project test', url:'project21', time:'12-29 AM10:55', situation:2},
-          {name:'New project test', url:'project21', time:'12-29 AM10:58', situation:3},
-          {name:'New project test', url:'project21', time:'12-29 AM10:59', situation:1}
-      ],
-      h1: 'Welcome to the remote collaboration team',
-      h2: '追寻灵感 需要想象力',
-      msg: 'none'
+      id: 1,
+      imgsArr: [],
+      group: 1, // request param
+      end: false, // 是否已经到底.......
+      maxpage: 2,
+      forum: {},
+      threadlist: {},
+
+      over: false, // 结束waterfall加载
+      layer: false,
+      layerid: 666,
+      list:[
+          {id:1, msg: 'aaa', name:'基于ACK的', url:'project21', time:'12-29 AM10:53', situation:1},
+          {id:1, msg: 'aaa', name:'ididid', url:'project21', time:'12-29 AM10:54', situation:1},
+          {id:1, msg: 'aaa', name:'New project test', url:'project21', time:'12-29 AM10:55', situation:2},
+          {id:1, msg: 'aaa', name:'New project test', url:'project21', time:'12-29 AM10:55', situation:2},
+          {id:1, msg: 'aaa', name:'New project test', url:'project21', time:'12-29 AM10:58', situation:3},
+          {id:1, msg: 'aaa', name:'New project test', url:'project21', time:'12-29 AM10:59', situation:1}
+      ]
+    }
+  },
+  created() {},
+  mounted: function() {
+    this.id = this.$route.params.id
+    this.getData()
+
+    // 监听浏览器后退事件 如果点击前进呢?
+    window.onpopstate = () => {
+      if (this.layer) {
+        this.layer = false
+      }
+    }
+  },
+  directives: {
+    // 使用 v-focus 在元素显示时自动聚焦
+    focus: {
+      inserted: function(el) {
+        el.focus()
+      }
+    }
+  },
+  methods: {
+    /* 点击弹窗空白位置或按下 esc 时关闭弹出层 (假设已聚焦到div)
+     * 先撤销底层的 tabindex 封禁 (使用tab切换时防止光标在底层的)
+     * 要避免有延迟时的连续点击
+     * 将 url 恢复
+     */
+    layer_off: function(event) {
+      if (this.layer) {
+        this.layer = false
+        window.history.go(-1)
+      }
+    },
+
+    /* 打开 层 用于装填项目详细信息, 层本身就是项目, 而不再出层级
+     * 先封禁底层聚焦
+     * 传参 注意必须是整数类型
+     * 不触发 route 改变 URL
+     * 终止冒泡
+     */
+    layer_on: function(event) {
+      var state = ({
+        url: "2333",
+        title: "~title",
+        additionalKEY: "~additionalVALUE"
+      })
+      window.history.pushState(state, '~title', event.currentTarget.pathname)
+      this.layerid = parseInt(event.currentTarget.dataset.id)
+      this.layer = true
+      event.preventDefault()
+      // 弹出层时要禁止 tab 切换到底层 (给其他层设置tabindex使其禁止)
+    },
+
+    getData() {
+      // 替换的方法 , 后端不必再建表存储图像字段, 约定 x1 格式为 data/x1/xxx.webp 文件, 视网膜屏适配 x2, 文件名使用帖子id尽量避免后端输出
+      let server = this.$store.state.server.master.domain
+      axios.get(server + '/forum-' + this.id + '-' + this.group + '.htm?ajax=1').then(r => {
+
+        // 数据转化, 不必指望后端能输出什么好东西..
+        let obj = r.data.message.threadlist
+        let arr = []
+        for (let item in obj) {
+          arr.push({
+            id: obj[item].tid,
+            src: server + '/upload/preview/' + obj[item].tid + ".png",
+            info: obj[item].subject,
+            user: {
+              id: 1,
+              name: 'Last',
+              img: 'https://avatars3.githubusercontent.com/u/32554200?s=460&v=4',
+            },
+            list: {
+              id: 3,
+              name: 'R17.5'
+            }
+          })
+        }
+
+        //console.log(arr)
+        this.imgsArr = arr
+
+        this.group++
+        if (this.group >= this.maxpage) {
+          this.end = true
+        }
+      })
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
-#project {
-    .list {
-        width:100%;
-        max-width: 1000px;
-        margin: 32px auto;
-        ul{
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            li{
-                display: flex;
-                img {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    padding: 1rem .5rem;
-                }
-                a {
-                    display: block;
-                    padding: 1rem .5rem;
-                    p {
-                        color: #666;
-                        font-size: 1.3rem;
-                        padding-bottom: 3px;
-                    }
-                    span,time {
-                        padding: 5px 5px 0 0;
-                        color: #999;
+ul.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    > li {
+        display: flex;
+        > img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+        > a {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: #ccc
+        }
+    }
+}
+#content {
+    position: absolute;
+    top: 50px; // 这里缩进不能全屏
+    bottom: 0;
+    width: 100%;
+}
+
+#forum {
+    //position: relative;
+    //left: 0;
+    //top: 0;
+    //height: 100%;
+    //width: 100%;
+    // 卡片标题
+    .description {
+        display: block;
+        padding: 0 16px;
+        margin: 10px 0;
+        line-height: 1.35em;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+    // 卡片底部
+    .attribution {
+        color: #999;
+        border-top: 1px solid #F2F2F2;
+        background: #FAFAFA;
+        position: relative;
+        padding: 0 15px;
+        background: #fff;
+        .img {
+            width: 34px;
+            height: 34px;
+            margin: 16px 0;
+            display: block;
+            float: left;
+        }
+        a {
+            color: #9E7E6B;
+        }
+        a.img {
+            background-color: #faf7f7;
+        }
+        .avt {
+            width: 34px;
+            height: 34px;
+            display: block;
+            border-radius: 50%;
+        }
+        .text {
+            margin-left: 34px;
+            height: 51px;
+            padding: 15px 0 0 10px;
+            line-height: 1.5;
+            .inner {
+                height: 37px;
+                overflow: hidden;
+                .line {
+                    display: inline-block;
+                    width: 100%;
+                    .author {
+                        float: left;
+                        max-width: 120px;
+                        white-space: nowrap;
+                        max-height: 80px;
+                        overflow: hidden;
                     }
                 }
             }
         }
+        .replyButton {
+            display: block;
+            visibility: hidden;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 26px;
+            height: 16px;
+            background: url("/img/home_comment_act_icon.png") 0 0 no-repeat;
+            cursor: pointer;
+            -webkit-transition: opacity 0.2s linear;
+            -webkit-transition-property: opacity,right,bottom;
+            opacity: 0;
+        }
     }
 }
 
-#home_footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    text-align: center;
-    opacity: 0.6;
+/* 操作 */
+.stats {
+    padding: 0 15px;
+    margin: 10px 0;
+    span {
+        display: inline-block;
+        width: auto;
+        height: 12px;
+        line-height: 12px;
+        font-size: 12px;
+        margin-right: 10px;
+    }
+}
+.less {
+    color: #8c7e7e;
 }
 </style>

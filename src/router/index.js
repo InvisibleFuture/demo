@@ -28,7 +28,7 @@ export function createRouter () {
       { path: '/lists:id', name: 'List', component: () => import('@/components/List') },
       { path: '/ps:id', name: 'P', component: () => import('@/components/P') },
       { path: '/list:id', name: 'forum', component: () => import('@/components/forum') },
-      { path: '/liss:id', name: 'forum0', component: () => import('@/components/forum0') },
+      //{ path: '/liss:id', name: 'forum0', component: () => import('@/components/forum0') },
       //{ path: '/u:id', name: 'U', component: () => import('@/components/U') },
       //{ path: '/forum-:id.htm', name: 'forum', component: resolve => require(['@/components/forum'],resolve) },
 
