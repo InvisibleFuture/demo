@@ -21,11 +21,14 @@ export function createRouter () {
       { path: '/project:id', name: 'projectN', component: () => import('@/components/projectN') },
       //{ path: '/user', name: 'user', component: () => import('@/components/user') },
       { path: '/structure', name: 'structure', component: () => import('@/components/structure') },
+      { path: '/work', name: 'work', component: () => import('@/components/work') },
+
 
       { path: '/p:id', name: 'thread', component: () => import('@/components/thread') },
       { path: '/lists:id', name: 'List', component: () => import('@/components/List') },
       { path: '/ps:id', name: 'P', component: () => import('@/components/P') },
       { path: '/list:id', name: 'forum', component: () => import('@/components/forum') },
+      { path: '/liss:id', name: 'forum0', component: () => import('@/components/forum0') },
       //{ path: '/u:id', name: 'U', component: () => import('@/components/U') },
       //{ path: '/forum-:id.htm', name: 'forum', component: resolve => require(['@/components/forum'],resolve) },
 

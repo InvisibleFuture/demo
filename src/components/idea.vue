@@ -17,6 +17,8 @@
       </li>
     </ul>
   </div>
+
+  <p v-text="h2"></p>
 想法/创意 - 探讨 验证 立项 失败
 项目重启
   <div id="home_footer">
@@ -36,15 +38,15 @@ export default {
   data() {
     return {
       plist:[
-          {name:'New project test', url:'project21', time:'12-29 AM10:53', situation:1},
-          {name:'New project test', url:'project21', time:'12-29 AM10:54', situation:1},
+          {name:'基于ACK的', url:'project21', time:'12-29 AM10:53', situation:1},
+          {name:'ididid', url:'project21', time:'12-29 AM10:54', situation:1},
           {name:'New project test', url:'project21', time:'12-29 AM10:55', situation:2},
           {name:'New project test', url:'project21', time:'12-29 AM10:55', situation:2},
           {name:'New project test', url:'project21', time:'12-29 AM10:58', situation:3},
           {name:'New project test', url:'project21', time:'12-29 AM10:59', situation:1}
       ],
       h1: 'Welcome to the remote collaboration team',
-      h2: 'Essential Links',
+      h2: '追寻灵感 需要想象力',
       msg: 'none'
     }
   }

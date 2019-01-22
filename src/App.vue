@@ -60,6 +60,11 @@ export default {
             name: 'guild',
             url: 'guild'
         },
+        {
+            id: 666,
+            name: 'work',
+            url: 'work'
+        },
       ]
     }
   }
