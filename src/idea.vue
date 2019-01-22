@@ -1,20 +1,5 @@
 <template>
-<div id="forum">
-  <!-- 浮层 -->
-  <div v-if="layer" v-focus id="layer" tabindex="-1" @click="layer_off" @keyup.esc="layer_off" style="position:fixed;
-    left:0;
-    top:0;
-    right:0;
-    bottom: 0;
-    z-index:10;
-    background:rgba(240,239,240,.9);
-    overflow-y:scroll;
-    overflow-x:hidden;
-    outline:none;
-    /*cursor: crosshair;*/
-    ">
-    <item></item>
-  </div>
+<div id="idea">
 
   <!-- 表层 -->
   <ul class="list">
@@ -35,6 +20,13 @@
     </li>
   </ul>
 
+  <!-- 浮层 -->
+  <transition name="fade" mode="out-in">
+  <div v-if="layer" v-focus class="layer" tabindex="-1" @click="layer_off" @keyup.esc="layer_off">
+    <item></item>
+  </div>
+  </transition>
+
 </div>
 </template>
 
@@ -44,21 +36,11 @@ export default {
   name: 'idea',
   components: {
     // 动态引入组件们
-    'item': () => import('./guild.vue')
+    'item': () => import('./components/guild.vue')
   },
   data() {
     return {
-      id: 1,
-      imgsArr: [],
-      group: 1, // request param
-      end: false, // 是否已经到底.......
-      maxpage: 2,
-      forum: {},
-      threadlist: {},
-
-      over: false, // 结束waterfall加载
       layer: false,
-      layerid: 666,
       list:[
           {id:1, msg: 'aaa', name:'构建独创性解决方案', url:'project21', time:'12-29 AM10:53', situation:1},
           {id:1, msg: 'aaa', name:'让成本可控', url:'project21', time:'12-29 AM10:54', situation:1},
@@ -145,7 +127,6 @@ export default {
             }
           })
         }
-
         //console.log(arr)
         this.imgsArr = arr
 
@@ -160,6 +141,23 @@ export default {
 </script>
 
 <style lang="less">
+
+// 弹出层 layer
+div.layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: rgba(240, 239, 240, .9);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    outline: none;
+    tabindex: -1;
+    //cursor: crosshair;
+}
+
 ul.list {
     margin: 0;
     padding: 0;
@@ -179,107 +177,5 @@ ul.list {
         }
     }
 }
-#content {
-    position: absolute;
-    top: 50px; // 这里缩进不能全屏
-    bottom: 0;
-    width: 100%;
-}
 
-#forum {
-    //position: relative;
-    //left: 0;
-    //top: 0;
-    //height: 100%;
-    //width: 100%;
-    // 卡片标题
-    .description {
-        display: block;
-        padding: 0 16px;
-        margin: 10px 0;
-        line-height: 1.35em;
-        overflow: hidden;
-        word-wrap: break-word;
-    }
-    // 卡片底部
-    .attribution {
-        color: #999;
-        border-top: 1px solid #F2F2F2;
-        background: #FAFAFA;
-        position: relative;
-        padding: 0 15px;
-        background: #fff;
-        .img {
-            width: 34px;
-            height: 34px;
-            margin: 16px 0;
-            display: block;
-            float: left;
-        }
-        a {
-            color: #9E7E6B;
-        }
-        a.img {
-            background-color: #faf7f7;
-        }
-        .avt {
-            width: 34px;
-            height: 34px;
-            display: block;
-            border-radius: 50%;
-        }
-        .text {
-            margin-left: 34px;
-            height: 51px;
-            padding: 15px 0 0 10px;
-            line-height: 1.5;
-            .inner {
-                height: 37px;
-                overflow: hidden;
-                .line {
-                    display: inline-block;
-                    width: 100%;
-                    .author {
-                        float: left;
-                        max-width: 120px;
-                        white-space: nowrap;
-                        max-height: 80px;
-                        overflow: hidden;
-                    }
-                }
-            }
-        }
-        .replyButton {
-            display: block;
-            visibility: hidden;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            width: 26px;
-            height: 16px;
-            background: url("/img/home_comment_act_icon.png") 0 0 no-repeat;
-            cursor: pointer;
-            -webkit-transition: opacity 0.2s linear;
-            -webkit-transition-property: opacity,right,bottom;
-            opacity: 0;
-        }
-    }
-}
-
-/* 操作 */
-.stats {
-    padding: 0 15px;
-    margin: 10px 0;
-    span {
-        display: inline-block;
-        width: auto;
-        height: 12px;
-        line-height: 12px;
-        font-size: 12px;
-        margin-right: 10px;
-    }
-}
-.less {
-    color: #8c7e7e;
-}
 </style>
