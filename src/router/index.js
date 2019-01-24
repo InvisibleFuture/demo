@@ -16,7 +16,7 @@ export function createRouter () {
       { path: '/guild:id', name: 'guild', component: () => import('@/components/guild') },
       { path: '/team', name: 'teams', component: () => import('@/components/teams') },
       { path: '/team:id', name: 'team', component: () => import('@/components/team') },
-      { path: '/idea', name: 'idea', component: () => import('@/idea') },
+      { path: '/idea', name: 'idea', component: () => import('@/components/idea/idea.vue') },
       { path: '/project', name: 'project', component: () => import('@/components/project') },
       { path: '/project:id', name: 'projectN', component: () => import('@/components/projectN') },
       //{ path: '/user', name: 'user', component: () => import('@/components/user') },

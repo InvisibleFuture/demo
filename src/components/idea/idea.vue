@@ -1,320 +1,186 @@
 <template>
-<div id="guild" @click.stop>
-  <section class="thread">
-    <div class="title">
-      <div class="post_is_original "><img src="//www-static.diyidan.net/static/image/post_is_original_logo.png?v=c4183c2a12a7f239a458b0dac14c135d"></div>
-      <div class="post_is_digest"><img src="//www-static.diyidan.net/static/image/post_is_digest_logo.png?v=9b0f46baaee318150be35922db5b5f38"></div>
-      <h1 v-text="title"></h1>
-      <span>关注</span>
-      <div class="clearfix" style="font-size: 12px; color: rgb(127, 127, 127); margin-right: -72px; position: relative;">
-        来自版区：
-        <a href="/main/area/104002/1" style="color: rgb(255, 170, 0);">数据</a></div>
-    </div>
-    <div class="main" v-text="msg"></div>
-    <div class="res">
-        发起项目
-        关注
-        打赏
-        赞同
-    </div>
-    <div class="item">
-        发起项目
-        由此想法衍生的项目
-    </div>
-    <div class="tag">
-        贴标签
-        此想法关联的属性, 被用于检索和关注范围推送
-    </div>
-    <div class="file">
-        附件
-        附件文件通常存储于外部服务器, 此处使用 dissoo
-    </div>
-    <div class="reply">
-      <ul>
-        <li v-for="r in reply">
-          <div class="header">
-            <img :src="r.user.avatar" :alt="r.user.name">
-            <div>
-              <span v-text="r.user.name"></span>
-              <p>djaksdhajdka</p>
-            </div>
-          </div>
-          <div class="content">
-            <span v-text="r.user.name"></span>
-            <span v-text="r.user.name"></span>
-            <span v-text="r.user.name"></span>
-            <span v-text="r.user.name"></span>
-            <div class="ss" v-text="r.msg"></div>
-          </div>
-          <div class="time">发表于 <time>time</time></div>
-          <div class="footer">
-              <span>赞同</span>
-              <span>反对</span>
-              <span>12 条评论</span>
-              <span>分享</span>
-              <span>收藏</span>
-              <span>感谢</span>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <p>
-      公会页面, 这里展示所有公会的列表
-      若是带有id号, 则展示对应id的公会页面
-      公会页面展示招募信息, 也是排行榜
-      公会页面内是公会内务信息, 可以部分公开
-      决策系统中, 需要有投票系统
-      暂时还不需要协会系统
-    </p>
-  </section>
+<div id="idea">
 
-  <aside>
-    <div class="author">
-      <div class="user_info">
-        <img src="https://xn--uesr8q.com/upload/preview/130.png" alt="img">
-        <div>
-          <p>
-            <span>御坂</span>
-            <span>Lv&nbsp;12</span>
-          </p>
-          <p>「今でもあなたは私の光。」</p>
-        </div>
-      </div>
-      <div class="follow">
-        <span id="post_detail_follow_btn" onclick="setRelation(this, '6294360860113072660')" class="follow_span" style="display: none;">关注</span>
-        <span id="post_detail_user_login" onclick="do_login()" class="follow_span">关注</span>
+  <!-- 表层 -->
+  <ul class="list">
+    <li v-for="r in list">
+      <img src="https://xn--uesr8q.com/upload/preview/131.png">
+      <!-- 注意此处不使用 router-link, 由于要对链接拦截并在本页显示-->
+      <a :href="'p'+r.id" :data-id="r.id" @click.stop="layer_on">
+        <p v-text="r.name"></p>
         <p>
-          <span style="margin-right: 20px;">粉丝：3324</span>
-          <span>糖果：8935</span>
+        <span>Last</span>
+        <time v-text="r.time"></time>
+        <span v-if="r.situation == 1">构建/招募</span>
+        <span v-if="r.situation == 2">运作/稳定</span>
+        <span v-if="r.situation == 3">终止/成功</span>
+        <span v-if="r.situation == 4">终止/失败</span>
         </p>
-      </div>
-    </div>
+      </a>
+    </li>
+  </ul>
 
-    <div class="recommend">
-      <ul>
-        <li>推荐1</li>
-        <li>推荐1</li>
-        <li>推荐1</li>
-        <li>推荐1</li>
-      </ul>
-    </div>
-  </aside>
+  <!-- 浮层 -->
+  <transition name="fade" mode="out-in">
+  <div v-if="layer" v-focus class="layer" tabindex="-1" @click="layer_off" @keyup.esc="layer_off">
+    <item></item>
+  </div>
+  </transition>
 
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'guild',
+  name: 'idea',
+  components: {
+    'item': () => import('../t/main.vue')
+  },
   data() {
     return {
-      title: 'Idea 尚未能发起项目的',
-      msg: '没有新的公会..',
-      reply: [{
-          id: 1,
-          msg: 'is msg info..',
-          user: {
-            id: 66,
-            name: 'Last',
-            avatar: '666'
-          }
-        },
-        {
-          id: 1,
-          msg: 'is msg info..',
-          user: {
-            id: 66,
-            name: 'Last',
-            avatar: '666'
-          }
-        },
-        {
-          id: 1,
-          msg: 'is msg info..',
-          user: {
-            id: 66,
-            name: 'Last',
-            avatar: '666'
-          }
-        },
-      ],
-      list: [{
-          msg: '任何人都可以创建自己的公会'
-        },
-        {
-          msg: '公会作为一个集合体接受或自主发起项目'
-        },
-        {
-          msg: '公会招募的会员代表对其能力与品格的认可, 公会对其在内部事务上的行为负责'
-        },
-        {
-          msg: '自由化的(任务自主参与), 无权责的'
-        }
+      layer: false,
+      list:[
+          {id:1, msg: 'aaa', name:'构建独创性解决方案', url:'project21', time:'12-29 AM10:53', situation:1},
+          {id:1, msg: 'aaa', name:'让成本可控', url:'project21', time:'12-29 AM10:54', situation:1},
+          {id:1, msg: 'aaa', name:'完成资源整合、确立多方共建', url:'project21', time:'12-29 AM10:55', situation:2},
+          {id:1, msg: 'aaa', name:'做好时间规划、节点有效驱动', url:'project21', time:'12-29 AM10:55', situation:2},
+          {id:1, msg: 'aaa', name:'New project test', url:'project21', time:'12-29 AM10:58', situation:3},
+          {id:1, msg: 'aaa', name:'New project test', url:'project21', time:'12-29 AM10:59', situation:1}
       ]
+    }
+  },
+  created() {},
+  mounted: function() {
+    this.id = this.$route.params.id
+    this.getData()
+
+    // 监听浏览器后退事件 如果点击前进呢?
+    window.onpopstate = () => {
+      if (this.layer) {
+        this.layer = false
+      }
+    }
+  },
+  directives: {
+    // 使用 v-focus 在元素显示时自动聚焦
+    focus: {
+      inserted: function(el) {
+        el.focus()
+      }
+    }
+  },
+  methods: {
+    /* 点击弹窗空白位置或按下 esc 时关闭弹出层 (假设已聚焦到div)
+     * 先撤销底层的 tabindex 封禁 (使用tab切换时防止光标在底层的)
+     * 要避免有延迟时的连续点击
+     * 将 url 恢复
+     */
+    layer_off: function(event) {
+      if (this.layer) {
+        this.layer = false
+        window.history.go(-1)
+      }
+    },
+
+    /* 打开 层 用于装填项目详细信息, 层本身就是项目, 而不再出层级
+     * 先封禁底层聚焦
+     * 传参 注意必须是整数类型
+     * 不触发 route 改变 URL
+     * 终止冒泡
+     */
+    layer_on: function(event) {
+      var state = ({
+        url: "2333",
+        title: "~title",
+        additionalKEY: "~additionalVALUE"
+      })
+      window.history.pushState(state, '~title', event.currentTarget.pathname)
+      this.layerid = parseInt(event.currentTarget.dataset.id)
+      this.layer = true
+      event.preventDefault()
+      // 弹出层时要禁止 tab 切换到底层 (给其他层设置tabindex使其禁止)
+    },
+
+    getData() {
+      // 替换的方法 , 后端不必再建表存储图像字段, 约定 x1 格式为 data/x1/xxx.webp 文件, 视网膜屏适配 x2, 文件名使用帖子id尽量避免后端输出
+      let server = this.$store.state.server.master.domain
+      axios.get(server + '/forum-' + this.id + '-' + this.group + '.htm?ajax=1').then(r => {
+
+        // 数据转化, 不必指望后端能输出什么好东西..
+        let obj = r.data.message.threadlist
+        let arr = []
+        for (let item in obj) {
+          arr.push({
+            id: obj[item].tid,
+            src: server + '/upload/preview/' + obj[item].tid + ".png",
+            info: obj[item].subject,
+            user: {
+              id: 1,
+              name: 'Last',
+              img: 'https://avatars3.githubusercontent.com/u/32554200?s=460&v=4',
+            },
+            list: {
+              id: 3,
+              name: 'R17.5'
+            }
+          })
+        }
+        //console.log(arr)
+        this.imgsArr = arr
+
+        this.group++
+        if (this.group >= this.maxpage) {
+          this.end = true
+        }
+      })
     }
   }
 }
 </script>
 
 <style lang="less">
-div.reply {
-    >ul {
-        >li {
-            >div.header {
-                display: flex;
-                padding: 1rem;
-                img {
-                    width: 38px;
-                    height: 38px;
-                    border-radius: 3px;
-                    background: #ccc;
-                }
-                div {
-                    padding-left: 1rem;
-                    span {
-                        color: #333;
-                        font-size: 1.5rem;
-                    }
-                    p {
-                        color: #666;
-                    }
-                }
-            }
-            >div.content {
-                padding: 1rem 1rem 2rem 1rem;
-            }
-            >div.footer {
-                padding: 1rem;
-            }
-        }
-    }
+
+// 弹出层 layer
+div.layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: rgba(240, 239, 240, .9);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    outline: none;
+    tabindex: -1;
+    //cursor: crosshair;
 }
-#guild {
-    //padding: 30px;
-    //min-height: 600px;
-    //text-align: center;
-    //padding-bottom: 40px;
-    width: 1000px;
-    height: auto;
-    margin: 0 auto;
-    padding-bottom: 40px;
-    padding-top: 30px;
-    overflow: auto;
-    zoom: 1;
+
+#idea {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
 }
-section.thread {
-    background: #fff;
-    margin: 0 auto;
-    border: 1px solid #f4f4f4;
-    border-radius: 4px;
-    width: 697px;
-    float: left;
-    .title {
-        padding: 20px 100px 12px 35px;
-        border-bottom: 1px solid #f8f8f8;
-        font-weight: bold;
-        line-height: 30px;
-        font-size: 19px;
-        color: #242424;
-        position: relative;
-        h1 {
-            font-weight: bold;
-            line-height: 30px;
-            font-size: 19px;
-            color: #242424;
-            padding: 0;
-            margin: 0;
-        }
-        .post_is_original {
-            width: 30px;
-            height: 20px;
-            float: left;
-            margin-top: 4px;
-            margin-right: 8px;
-            img {
-                display: block;
-                width: 100%;
-            }
-        }
-        .post_is_digest {
-            width: 20px;
-            height: 21px;
-            float: left;
-            margin: 5px 8px 0 0;
-            img {
-                display: block;
-                width: 100%;
-            }
-        }
-        span {
-            height: 30px;
-            width: 40px;
-            border-radius: 15px;
-            letter-spacing: 2px;
-            line-height: 30px;
-            text-align: left;
-            padding-left: 40px;
-            color: #fff;
-            background: #FD4C86;
-            background-size: 25px;
-            cursor: pointer;
-            display: inherit;
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            margin-top: -26px;
-            font-size: 13px;
-        }
-    }
-    .main {
-        p {
-            color: #666;
-        }
-        img {
-            border-radius: 3px;
-        }
-    }
-}
-aside {
-    width: 290px;
-    float: right;
-}
-div.author {
-    margin: 0 0 10px;
-    border-radius: 4px;
-    color: #656565;
-    background-color: #fff;
-    position: relative;
-    overflow: hidden;
-    .user_info {
-        background: #efefef;
+
+ul.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    > li {
         display: flex;
-        padding: 10px;
-        img {
-            width: 64px;
-            height: 64px;
+        > img {
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
         }
-        p {
-            padding: 10px 0 0 10px;
+        > a {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: #ccc
         }
-    }
-    .follow {
-        padding: 10px;
     }
 }
 
-div.recommend {
-    color: #656565;
-    background: #fff;
-    border-radius: 4px;
-    padding: 10px;
-    overflow: hidden;
-    ul {
-        li {
-            color: #656565;
-            transition: all 0.3s linear;
-        }
-    }
-}
 </style>
