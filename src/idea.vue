@@ -35,7 +35,6 @@ import axios from 'axios'
 export default {
   name: 'idea',
   components: {
-    // 动态引入组件们
     'item': () => import('./components/guild.vue')
   },
   data() {
@@ -156,6 +155,12 @@ div.layer {
     outline: none;
     tabindex: -1;
     //cursor: crosshair;
+}
+
+#idea {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
 }
 
 ul.list {
