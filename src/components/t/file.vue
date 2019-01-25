@@ -31,6 +31,7 @@ export default {
 
 <style lang="less">
 div.file {
+    padding: 0 0 10px 0;
     ul {
         margin: 0;
         padding: 0;

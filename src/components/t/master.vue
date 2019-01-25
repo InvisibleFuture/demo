@@ -1,5 +1,5 @@
 <template>
-<div class="content">
+<div class="master">
   <div class="title">
     <div class="post_is_original "><img src="//www-static.diyidan.net/static/image/post_is_original_logo.png?v=c4183c2a12a7f239a458b0dac14c135d"></div>
     <div class="post_is_digest"><img src="//www-static.diyidan.net/static/image/post_is_digest_logo.png?v=9b0f46baaee318150be35922db5b5f38"></div>
@@ -10,30 +10,25 @@
       <a href="/main/area/104002/1" style="color: rgb(255, 170, 0);">数据</a></div>
   </div>
   <div class="main" v-text="msg"></div>
-  <div class="res">
-    发起项目
-    关注
-    打赏
-    赞同
-  </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'content',
+  name: 'master',
   data() {
     return {
-
+      title: 'Idea 尚未能发起项目的',
+      msg: '没有新的公会..'
     }
   }
 }
 </script>
 
 <style lang="less">
-div.content {
+div.master {
     .title {
-        padding: 20px 100px 12px 35px;
+        padding: 0 100px 12px 0;
         border-bottom: 1px solid #f8f8f8;
         font-weight: bold;
         line-height: 30px;
@@ -83,13 +78,14 @@ div.content {
             cursor: pointer;
             display: inherit;
             position: absolute;
-            right: 20px;
+            right: -15px;
             top: 50%;
-            margin-top: -26px;
+            margin-top: -30px;
             font-size: 13px;
         }
     }
     .main {
+        padding: 12px 0;
         p {
             color: #666;
         }

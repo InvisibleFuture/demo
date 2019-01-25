@@ -1,14 +1,21 @@
 <template>
-<div id="guild" @click.stop>
-  <section class="thread">
+<div id="guild">
+  <section @click.stop>
     <master></master>
-    <item></item>
-    <file></file>
     <tag></tag>
+    <file></file>
+
+    <item></item>
+    <div class="res">
+      发起项目
+      关注
+      打赏
+      赞同
+    </div>
     <reply></reply>
   </section>
 
-  <aside>
+  <aside @click.stop>
     <author></author>
     <recommend></recommend>
   </aside>
@@ -20,7 +27,7 @@
 export default {
   name: 'guild',
   components: {
-    'master': () => import('./content'),
+    'master': () => import('./master'),
     'item': () => import('./item'),
     'file': () => import('./file'),
     'tag': () => import('./tag'),
@@ -29,10 +36,7 @@ export default {
     'recommend': () => import('./recommend')
   },
   data() {
-    return {
-      title: 'Idea 尚未能发起项目的',
-      msg: '没有新的公会..'
-    }
+    return {}
   }
 }
 </script>
@@ -50,18 +54,17 @@ export default {
     padding-top: 30px;
     overflow: auto;
     zoom: 1;
-}
-section.thread {
-    background: #fff;
-    margin: 0 auto;
-    border: 1px solid #f4f4f4;
-    border-radius: 4px;
-    width: 697px;
-    float: left;
-
-}
-aside {
-    width: 290px;
-    float: right;
+    display: flex;
+    section {
+        flex: 10;
+        padding: 24px 35px;
+        border: 1px solid #f4f4f4;
+        border-radius: 4px;
+        background: #fff;
+    }
+    aside {
+        flex: 4;
+        margin: 0 0 0 8px;
+    }
 }
 </style>

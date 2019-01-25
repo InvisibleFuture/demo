@@ -80,10 +80,12 @@ export default {
 <style lang="less">
 div.reply {
     > ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
         > li {
             > div.header {
                 display: flex;
-                padding: 1rem;
                 img {
                     width: 38px;
                     height: 38px;
@@ -102,10 +104,11 @@ div.reply {
                 }
             }
             > div.content {
-                padding: 1rem 1rem 2rem;
+                margin: 0;
+                padding: 10px 0;
             }
             > div.footer {
-                padding: 1rem;
+                padding: 1rem 0;
             }
         }
     }
