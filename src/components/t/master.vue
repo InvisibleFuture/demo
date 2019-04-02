@@ -18,7 +18,7 @@ export default {
   name: 'master',
   data() {
     return {
-      title: 'Idea 尚未能发起项目的',
+      title: 'Idea 尚未能发起项目的a',
       msg: '没有新的公会..'
     }
   }

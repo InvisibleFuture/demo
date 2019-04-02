@@ -3,28 +3,32 @@
 
   <!-- 表层 -->
   <ul class="list">
+    <!--卡片帧-->
     <li v-for="r in list">
       <img src="https://xn--uesr8q.com/upload/preview/131.png">
       <!-- 注意此处不使用 router-link, 由于要对链接拦截并在本页显示-->
       <a :href="'p'+r.id" :data-id="r.id" @click.stop="layer_on">
         <p v-text="r.name"></p>
         <p>
-        <span>Last</span>
-        <time v-text="r.time"></time>
-        <span v-if="r.situation == 1">构建/招募</span>
-        <span v-if="r.situation == 2">运作/稳定</span>
-        <span v-if="r.situation == 3">终止/成功</span>
-        <span v-if="r.situation == 4">终止/失败</span>
+          <span>Last</span>
+          <time v-text="r.time"></time>
+          <span v-if="r.situation == 1">构建/招募</span>
+          <span v-if="r.situation == 2">运作/稳定</span>
+          <span v-if="r.situation == 3">终止/成功</span>
+          <span v-if="r.situation == 4">终止/失败</span>
         </p>
       </a>
     </li>
   </ul>
 
+  计划一般较长, 不适合直接显示<br>
+  针对一个话题的讨论一般篇幅也较大.
+
   <!-- 浮层 -->
   <transition name="fade" mode="out-in">
-  <div v-if="layer" v-focus class="layer" tabindex="-1" @click="layer_off" @keyup.esc="layer_off">
-    <item></item>
-  </div>
+    <div v-if="layer" v-focus class="layer" tabindex="-1" @click="layer_off" @keyup.esc="layer_off">
+      <item></item>
+    </div>
   </transition>
 
 </div>
@@ -40,13 +44,54 @@ export default {
   data() {
     return {
       layer: false,
-      list:[
-          {id:1, msg: 'aaa', name:'构建独创性解决方案', url:'project21', time:'12-29 AM10:53', situation:1},
-          {id:1, msg: 'aaa', name:'让成本可控', url:'project21', time:'12-29 AM10:54', situation:1},
-          {id:1, msg: 'aaa', name:'完成资源整合、确立多方共建', url:'project21', time:'12-29 AM10:55', situation:2},
-          {id:1, msg: 'aaa', name:'做好时间规划、节点有效驱动', url:'project21', time:'12-29 AM10:55', situation:2},
-          {id:1, msg: 'aaa', name:'New project test', url:'project21', time:'12-29 AM10:58', situation:3},
-          {id:1, msg: 'aaa', name:'New project test', url:'project21', time:'12-29 AM10:59', situation:1}
+      list: [{
+          id: 1,
+          msg: 'aaa',
+          name: '构建独创性解决方案',
+          url: 'project21',
+          time: '12-29 AM10:53',
+          situation: 1
+        },
+        {
+          id: 1,
+          msg: 'aaa',
+          name: '让成本可控',
+          url: 'project21',
+          time: '12-29 AM10:54',
+          situation: 1
+        },
+        {
+          id: 1,
+          msg: 'aaa',
+          name: '完成资源整合、确立多方共建',
+          url: 'project21',
+          time: '12-29 AM10:55',
+          situation: 2
+        },
+        {
+          id: 1,
+          msg: 'aaa',
+          name: '做好时间规划、节点有效驱动',
+          url: 'project21',
+          time: '12-29 AM10:55',
+          situation: 2
+        },
+        {
+          id: 1,
+          msg: 'aaa',
+          name: 'New project test',
+          url: 'project21',
+          time: '12-29 AM10:58',
+          situation: 3
+        },
+        {
+          id: 1,
+          msg: 'aaa',
+          name: 'New project test',
+          url: 'project21',
+          time: '12-29 AM10:59',
+          situation: 1
+        }
       ]
     }
   },
@@ -140,7 +185,6 @@ export default {
 </script>
 
 <style lang="less">
-
 // 弹出层 layer
 div.layer {
     position: fixed;
@@ -172,15 +216,16 @@ ul.list {
         > img {
             width: 32px;
             height: 32px;
+            padding: 0.5rem 0;
             border-radius: 50%;
         }
         > a {
             display: flex;
             flex-direction: column;
             width: 100%;
-            background: #ccc
+            padding: 0.5rem;
+            //background: #ccc
         }
     }
 }
-
 </style>

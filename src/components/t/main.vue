@@ -17,6 +17,7 @@
 
   <aside @click.stop>
     <author></author>
+    <status></status>
     <recommend></recommend>
   </aside>
 
@@ -33,7 +34,8 @@ export default {
     'tag': () => import('./tag'),
     'reply': () => import('./reply'),
     'author': () => import('./author'),
-    'recommend': () => import('./recommend')
+    'recommend': () => import('./recommend'),
+    'status': () => import('./status')
   },
   data() {
     return {}

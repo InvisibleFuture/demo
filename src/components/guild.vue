@@ -108,7 +108,7 @@ export default {
   name: 'guild',
   data() {
     return {
-      title: 'Idea 尚未能发起项目的',
+      title: 'Idea 尚未能发起项目的s',
       msg: '没有新的公会..',
       reply: [{
           id: 1,
