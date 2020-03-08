@@ -7,7 +7,7 @@
             <span>清空记录</span>
           </div>
           <ul>
-            <li v-for="item in msg" :class="{new:item.new}" v-on:mouseover="reading(item.id,item.new);item.new=false">
+            <li v-for="item in msg" v-bind:key="item.id" :class="{new:item.new}" v-on:mouseover="reading(item.id,item.new);item.new=false">
               <img :src="item.user.img">
               <div>
                 <p v-text="item.content"></p>
@@ -34,7 +34,7 @@ export default {
                 user: {
                   id: 2,
                   name: "Last",
-                  img: "https://xn--uesr8q.com/upload/preview/131.png",
+                  img: "http://xiaoyaozj.com/upload/avatar/000/104112.png?1583608106",
                   url: "u2"
                 }
               },
@@ -46,7 +46,7 @@ export default {
                 user: {
                   id: 2,
                   name: "Last",
-                  img: "https://xn--uesr8q.com/upload/preview/131.png",
+                  img: "http://xiaoyaozj.com/upload/avatar/000/104112.png?1583608106",
                   url: "u2"
                 }
               },
@@ -58,7 +58,7 @@ export default {
                 user: {
                   id: 2,
                   name: "Last",
-                  img: "https://xn--uesr8q.com/upload/preview/131.png",
+                  img: "http://xiaoyaozj.com/upload/avatar/000/104112.png?1583608106",
                   url: "u2"
                 }
               }

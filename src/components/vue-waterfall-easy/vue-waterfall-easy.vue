@@ -52,10 +52,9 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, .02), 0 4px 8px rgba(0, 0, 0, .02);
     border-radius: 3px;
     overflow: hidden;
-    -webkit-transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .02), 0 4px 8px rgba(0, 0, 0, .02);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .02), 0 4px 8px rgba(0, 0, 0, .02);
-    -webkit-backface-visibility: hidden;
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .02), 0 4px 8px rgba(0, 0, 0, .02);
+    backface-visibility: hidden;
 }
 
 .vue-waterfall-easy-container .vue-waterfall-easy .img-inner-box:hover {
@@ -72,10 +71,9 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, .02), 0 4px 8px rgba(0, 0, 0, .02);
     border-radius: 3px;
     overflow: hidden;
-    -webkit-transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .02), 0 4px 8px rgba(0, 0, 0, .02);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .02), 0 4px 8px rgba(0, 0, 0, .02);
-    -webkit-backface-visibility: hidden;
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .02), 0 4px 8px rgba(0, 0, 0, .02);
+    backface-visibility: hidden;
 }
 
 .pin:hover {
@@ -165,20 +163,20 @@
 
 <template>
 <div id="content">
-
   <div class="vue-waterfall-easy-container" :style="{width: width&amp;&amp;!isMobile ? width+'px' : '', height: parseFloat(height)==height ? height+'px': height }">
     <div class="loading ball-beat" v-show="isPreloading_c" :class="{first:isFirstLoad}">
       <slot name="loading" :isFirstLoad="isFirstLoad"></slot>
-      <div class="dot" v-if="!hasLoadingSlot" v-for="n in loadingDotCount" :style="loadingDotStyle"></div>
+      <div class="dot" v-if="!hasLoadingSlot" v-for="n in loadingDotCount" v-bind:key="n.id" :style="loadingDotStyle"></div>
     </div>
     <div class="vue-waterfall-easy-scroll" ref="scrollEl">
-      <slot name="waterfall-head"></slot>
+      <slot></slot>
+      <!--slot name="waterfall-head"></slot-->
       <div class="vue-waterfall-easy" :style="isMobile? '' :{width: colWidth*cols+'px',left:'50%', marginLeft: -1*colWidth*cols/2 +'px'}">
         <div class="img-box" v-for="(v,i) in imgsArr_c" :class="[cardAnimationClass, {__err__: v._error}]" :style="{padding: (isMobile ? mobileGap : gap)/2+'px', width: isMobile ? '' : colWidth+'px'}">
 
           <div class="img-inner-box">
             <a class="img-wraper" v-if="v[srcKey]" @click.stop="layer_on" :data-id="v[hrefKey]" :href="'p'+v[hrefKey]" :style="{width:imgWidth_c + 'px',height:v._height ? v._height+'px':false}"><img :src="v[srcKey]" /></a>
-            <slot :index="i" :value="v"></slot>
+            <!--slot :index="i" :value="v"></slot-->
             <!--  -->
             <div class="img-info">
               <p class="description" v-text="v.info"></p>

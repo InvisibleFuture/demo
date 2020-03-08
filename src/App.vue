@@ -3,7 +3,7 @@
   <header id="header">
     <nav>
       <ul class="nav">
-        <li v-for="item in navs">
+        <li v-for="item in navs" v-bind:key="item.id">
           <router-link :to="item.url">{{ item.name }}</router-link>
         </li>
       </ul>
@@ -80,13 +80,13 @@ export default {
 ::-webkit-scrollbar-track {
     border-radius: 3px;
     background: rgba(0,0,0,0.06);
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.08);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.08);
 }
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
     border-radius: 3px;
     background: rgba(0,0,0,0.12);
-    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
 }
 
 * {
@@ -195,8 +195,6 @@ html {
         background: #444;
     }
 }
-
-#main {}
 
 #footer {
     display: none;

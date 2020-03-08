@@ -1,8 +1,8 @@
 <template>
 <div id="thread">
+  <!--section class="thread" @click.stop v-if="Object.keys(thread).length != 0"-->
   <section class="thread" @click.stop v-if="Object.keys(thread).length != 0">
-
-    <div class="thread_title">
+    <div class="thread_title" v-if="Object.keys(thread).length != 0">
       <div class="post_is_original "><img src="//www-static.diyidan.net/static/image/post_is_original_logo.png?v=c4183c2a12a7f239a458b0dac14c135d"></div>
       <div class="post_is_digest"><img src="//www-static.diyidan.net/static/image/post_is_digest_logo.png?v=9b0f46baaee318150be35922db5b5f38"></div>
       <h1>{{ thread.subject }}</h1>
@@ -29,12 +29,12 @@
     <!--  first  -->
 
     <!-- 主贴 最好避免直接插入标签防止 xss 攻击 -->
-    <div class="thread_main" v-html="first.message_fmt"></div>
+    <div class="thread_main" v-html="first.message_fmt" v-if="Object.keys(thread).length != 0"></div>
 
     <!-- 附件 注意这个url会直接暴露附件真实地址, API还需要修改-->
-    <div class="files">
+    <div class="files" v-if="Object.keys(thread).length != 0">
       <ul>
-        <li v-for="r in first.filelist">
+        <li v-for="r in first.filelist" v-bind:key="r.id">
           <!-- 要判断是否有权下载, 否则不提供链接并提示 -->
           <a :href="r.url" :download="r.orgfilename" v-text="r.orgfilename"></a>
           <time v-text="r.create_date_fmt"></time>
@@ -43,12 +43,12 @@
     </div>
 
 
-
+  </section>
+  <section>
     <div id="post" class="post">
       <!-- 只有一级回复 -->
       <ul>
-        <li v-for="item in postlist">
-            <!-- 'http://127.0.0.1/'+ -->
+        <li v-for="item in postlist" v-bind:key="item.id">
           <div><img :src="item.user.avatar_url" /></div>
           <div>
             <span class="name">{{ item.user.username }}</span>
@@ -75,7 +75,7 @@
           </div>
         </li>
         <li v-if="login">
-          <div><img :src="first.user.avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username"></div>
+          <div><!--img :src="first.user.avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username"--></div>
           <div>
             <div id="textarea" v-text="textarea" contenteditable="true"></div>
             <div id="textareas">
@@ -94,7 +94,7 @@
     <!-- Component : author information -->
     <div class="author" @click.stop>
       <div class="user_head_div">
-        <img :src="first.user.avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username">
+        <!--img :src="first.user.avatar_url" onclick="gotoUserPage('/user6294360860113072660')" :alt="first.user.username"-->
         <div class="ie2">
           <p>
             <span onclick="gotoUserPage('/user6294360860113072660')">{{ first.user.username }}</span>
@@ -140,7 +140,7 @@ export default {
       id: 0,
       thread: {},
       first: {},
-      postlist: {},
+      postlist: [],
       textarea: "这是回复内容"
     }
   },
@@ -156,16 +156,21 @@ export default {
     }
 
     // 非服务端渲染时需要自己获取数据, 这种判断方式非常不优雅, 需要考虑将它组件化
-
+    console.log("非服务端渲染时需要自己获取数据, 这种判断方式非常不优雅, 需要考虑将它组件化")
     this.fetchData()
   },
   methods: {
     fetchData: async function() {
       let server = this.$store.state.server.master.domain
       axios.get( server + '/thread-' + this.id + '.htm?ajax=1').then(r => {
-        this.thread = r.data.message.thread,
-        this.first = r.data.message.first,
-        this.postlist = r.data.message.postlist
+        //this.thread = r.data.message.thread,
+        //this.first = r.data.message.first,
+        r.data.message.forEach((item, i) => {
+          item.user_avatar_url = server+'/'+item.user_avatar_url
+          item.user.avatar_url = server+'/'+item.user.avatar_url
+        })
+        this.postlist = r.data.message
+        console.log(r.data.message)
       })
     },
     postMsg: async function() {
@@ -412,7 +417,6 @@ export default {
     pointer-events: none;
     user-select: none;
 }
-.post time {}
 
 .post_is_original {
     width: 30px;

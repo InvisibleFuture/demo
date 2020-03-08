@@ -8,7 +8,7 @@
       <br>
       <br>
       <ul>
-        <li v-for="item in list">
+        <li v-for="item in list" v-bind:key="item.id">
           <router-link :to="item.url" v-text="item.name"></router-link>
         </li>
       </ul>

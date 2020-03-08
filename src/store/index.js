@@ -28,11 +28,11 @@ export default new Vuex.Store({
       {id: 1, msg:'wlgdc..'}
     ],
     server: {
-      master: { domain: 'https://xn--uesr8q.com', path: '/' },
-      data:   { domain: 'https://xn--uesr8q.com', path: '/' },
-      img:    { domain: 'https://xn--uesr8q.com', path: '/upload/preview/' },
-      file:   { domain: 'misakam.com', path: '/' },
-      ws:     { domain: 'misakam.com', path: '/' }
+      master: { domain: 'http://www.xiaoyaozj.com', path: '/' },
+      data:   { domain: 'http://www.xiaoyaozj.com', path: '/' },
+      img:    { domain: 'http://www.xiaoyaozj.com', path: '/upload/preview/' },
+      file:   { domain: 'http://www.xiaoyaozj.com', path: '/' },
+      ws:     { domain: 'http://www.xiaoyaozj.com', path: '/' }
     }
     // There seems to be no need to manage the data..
   },

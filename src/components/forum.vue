@@ -1,6 +1,16 @@
 <template>
 <div id="forum">
   <vue-waterfall-easy :imgsArr="imgsArr" :end="end" @scrollReachBottom="getData">
+    <div style="display:flex; justify-content:center;">
+      <div>
+        <label for="city">出发城市</label>
+        <city-picker field="city" placeholder="选择您的出发城市" :city-list="cityList" :no-hot="false" :value.sync="cityId"></city-picker>
+      </div>
+      <div>
+        <label for="city">出发城市</label>
+        <city-picker field="city" placeholder="选择您的出发城市" :city-list="cityList" :no-hot="false" :value.sync="cityId"></city-picker>
+      </div>
+    </div>
   </vue-waterfall-easy>
 </div>
 </template>
@@ -8,6 +18,15 @@
 <script>
 import vueWaterfallEasy from './vue-waterfall-easy/vue-waterfall-easy.vue' // 瀑布流
 import axios from 'axios'
+
+import 'babel-polyfill'
+import cityList from './china-city-data/china-city-data.json' // 城市数据
+import myCityPicker from './vue-city-picker/city-picker.vue' // 城市选择
+//import 'babel-polyfill';
+//import cityList from 'china-city-data';
+//import myCityPicker from 'vue-city-picker';
+
+//默认值，可以注册一个城市列表全局变量（考虑到cityList会比较大，如项目中多次使用，单独为一个js文件比较好）
 
 export default {
   name: 'forum',
@@ -20,10 +39,13 @@ export default {
       maxpage: 2,
       forum: {},
       threadlist: {},
+      cityId: '', //选择城市ID
+		  cityList: cityList, // 城市数据
     }
   },
   components: {
-    vueWaterfallEasy
+    'vue-waterfall-easy': vueWaterfallEasy,
+    'city-picker': myCityPicker,
     //'vueWaterfallEasy': () => import('./vue-waterfall-easy/vue-waterfall-easy')
   },
   created() {
@@ -36,30 +58,26 @@ export default {
     getData() {
       // 替换的方法 , 后端不必再建表存储图像字段, 约定 x1 格式为 data/x1/xxx.webp 文件, 视网膜屏适配 x2, 文件名使用帖子id尽量避免后端输出
       let server = this.$store.state.server.master.domain
-      axios.get(server + '/forum-'+this.id+'-' + this.group + '.htm?ajax=1').then(r => {
-
-        // 数据转化, 不必指望后端能输出什么好东西..
-        let obj = r.data.message.threadlist
-        let arr = []
-        for (let item in obj) {
-          arr.push({
-            id: obj[item].tid,
-            src: server + '/upload/preview/' + obj[item].tid + ".png",
-            info: obj[item].subject,
+      //axios.get(server + '/forum-'+this.id+'-' + this.group + '.htm?ajax=1').then(r => {
+      axios.get(server + '/index-' + this.group + '.htm?ajax=1').then(r => {
+        let obj = r.data.message
+        obj.forEach((item, i) => {
+          //window.console.log(item)
+          this.imgsArr.push({
+            id: item.tid,
+            src: item.img,
+            info: item.subject,
             user: {
-                id: 1,
-                name: 'Last',
-                img: 'https://avatars3.githubusercontent.com/u/32554200?s=460&v=4',
+              id: 1,
+              name: item.user.username,
+              img: server+'/'+item.user.avatar_url,
             },
             list:{
                 id: 3,
-                name: 'R17.5'
+                name: '逍遥自驾'
             }
           })
-        }
-
-        //console.log(arr)
-        this.imgsArr = arr
+        })
 
         this.group++
         if (this.group >= this.maxpage) {
@@ -152,8 +170,8 @@ export default {
             height: 16px;
             background: url("/img/home_comment_act_icon.png") 0 0 no-repeat;
             cursor: pointer;
-            -webkit-transition: opacity 0.2s linear;
-            -webkit-transition-property: opacity,right,bottom;
+            transition: opacity 0.2s linear;
+            transition-property: opacity,right,bottom;
             opacity: 0;
         }
     }
