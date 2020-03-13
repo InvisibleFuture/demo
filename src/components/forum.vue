@@ -1,14 +1,18 @@
 <template>
 <div id="forum">
-  <vue-waterfall-easy :imgsArr="imgsArr" :end="end" @scrollReachBottom="getData">
+  <vue-waterfall-easy :imgsArr="imgsArr" :end="end" @scrollReachBottom="getData" ref="child1">
+      <ul class="seca">
+        <li>上海</li>
+        <li>安徽</li>
+        <li>湖北</li>
+        <li>四川</li>
+        <li>甘肃</li>
+      </ul>
+
     <div style="display:flex; justify-content:center;">
-      <div>
-        <label for="city">出发城市</label>
-        <city-picker field="city" placeholder="选择您的出发城市" :city-list="cityList" :no-hot="false" :value.sync="cityId"></city-picker>
-      </div>
-      <div>
-        <label for="city">出发城市</label>
-        <city-picker field="city" placeholder="选择您的出发城市" :city-list="cityList" :no-hot="false" :value.sync="cityId"></city-picker>
+      <div style="background:#ccc; display:flex; margin:15px; border-radius:4px;">
+        <label for="cityA" style="background:#5c6166;border-radius:4px 0 0 4px;line-height: 28px; padding:0 5px;color:#ddd; font-size:12px;">途经城市</label>
+        <city-picker v-on:child-say="listenToMyBoy" field="cityA" placeholder="添加您的途经城市" :city-list="cityList" :no-hot="false" :value.sync="cityId"></city-picker>
       </div>
     </div>
   </vue-waterfall-easy>
@@ -20,8 +24,8 @@ import vueWaterfallEasy from './vue-waterfall-easy/vue-waterfall-easy.vue' // �
 import axios from 'axios'
 
 import 'babel-polyfill'
-import cityList from './china-city-data/china-city-data.json' // 城市数据
-import myCityPicker from './vue-city-picker/city-picker.vue' // 城市选择
+import cityList     from '@/components/vue-city-picker/china-city-data.json' // 城市数据
+import myCityPicker from '@/components/vue-city-picker/city-picker.vue' // 城市选择
 //import 'babel-polyfill';
 //import cityList from 'china-city-data';
 //import myCityPicker from 'vue-city-picker';
@@ -36,7 +40,7 @@ export default {
       imgsArr: [],
       group: 1, // request param
       end: false, // 是否已经到底.......
-      maxpage: 2,
+      maxpage: 50,
       forum: {},
       threadlist: {},
       cityId: '', //选择城市ID
@@ -55,13 +59,33 @@ export default {
       this.getData()
   },
   methods: {
+    listenToMyBoy: function (somedata){
+      console.log(somedata)
+      // 更新视图, 即置空现存数据, 带参数 getData()
+      this.group = 1 // 重置翻页
+      //this.imgsArr = [] // 置空数据
+      this.$refs.child1.reset(); // 置空数据
+      this.cityId = somedata
+      this.getData() // 载入新数据
+      // 数据源: 按活跃时间排序全部的, 加精的, 关键词搜索的
+    },
     getData() {
       // 替换的方法 , 后端不必再建表存储图像字段, 约定 x1 格式为 data/x1/xxx.webp 文件, 视网膜屏适配 x2, 文件名使用帖子id尽量避免后端输出
+      let token = this.$store.state.token
       let server = this.$store.state.server.master.domain
       //axios.get(server + '/forum-'+this.id+'-' + this.group + '.htm?ajax=1').then(r => {
-      axios.get(server + '/index-' + this.group + '.htm?ajax=1').then(r => {
+      axios.get(server + '/index-' + this.group + '.htm?ajax=1&bbs_token='+token).then(r => {
         let obj = r.data.message
+        console.log(obj)
         obj.forEach((item, i) => {
+          // 将相对路径转换成绝对路径
+          var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\/])+$/;
+          if(!reg.test(item.img)){
+            item.img = server + '/' + item.img
+          }
+          if(!reg.test(item.user.avatar_url)){
+            item.user.avatar_url = server + '/' + item.user.avatar_url
+          }
           //window.console.log(item)
           this.imgsArr.push({
             id: item.tid,
@@ -70,17 +94,18 @@ export default {
             user: {
               id: 1,
               name: item.user.username,
-              img: server+'/'+item.user.avatar_url,
+              img: item.user.avatar_url,
             },
             list:{
                 id: 3,
                 name: '逍遥自驾'
-            }
+            },
+            data: item
           })
         })
 
         this.group++
-        if (this.group >= this.maxpage) {
+        if (this.group >= this.maxpage || obj.length != 20) {
           this.end = true
         }
       })
@@ -90,11 +115,21 @@ export default {
 </script>
 
 <style lang="less">
+ul.seca {
+  display:flex; justify-content:center; list-style:none; padding: 10px 0 0 0;
+  li {
+    margin: 4px; padding: 4px 8px;
+    border-radius: 4px;
+    background: #e8e8e8;
+  }
+}
+
 #content {
     position: absolute;
     top: 50px; // 这里缩进不能全屏
     bottom: 0;
     width: 100%;
+    background: #f8f9fb;
 }
 
 #forum {

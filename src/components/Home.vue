@@ -129,6 +129,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
+.amap-wrapper {
+  width: 800px;
+  height: 400px;
+}
+.amap-box {
+  width: 800px;
+  height: 400px;
+}
+
 #home_footer {
     position: fixed;
     bottom: 0;
@@ -141,24 +150,18 @@ export default {
     height: 320px;
     min-height: 40%;
     background: #3c4146;
-    padding-top: 100px;
-    position: relative;
-    .cent {
-        width: 100%;
-        padding: 1rem;
-        max-width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    border-bottom-left-radius: 50% 8px;
+    border-bottom-right-radius: 50% 8px;
     h1,
     h2 {
         color: #c3c3c3;
         font-weight: normal;
+        padding: 4rem 4rem 0 4rem;
     }
 
     ul {
         list-style-type: none;
-        padding: 0;
+        padding: 4rem;
         li {
             display: inline-block;
             margin: 0 20px 0 0;
@@ -173,14 +176,14 @@ export default {
         }
     }
 }
-#hello::after {
-    content: '';
-    background: #3c4146;
-    width: 100%;
-    height: 10px;
-    position: absolute;
-    right: 0;
-    bottom: -5px;
-    border-radius: 50%;
-}
+//#hello::after {
+//    content: '';
+//    background: #3c4146;
+//    width: 100%;
+//    height: 10px;
+//    position: absolute;
+//    right: 0;
+//    bottom: -5px;
+//    border-radius: 50%;
+//}
 </style>

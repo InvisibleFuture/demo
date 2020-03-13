@@ -175,7 +175,7 @@
         <div class="img-box" v-for="(v,i) in imgsArr_c" :class="[cardAnimationClass, {__err__: v._error}]" :style="{padding: (isMobile ? mobileGap : gap)/2+'px', width: isMobile ? '' : colWidth+'px'}">
 
           <div class="img-inner-box">
-            <a class="img-wraper" v-if="v[srcKey]" @click.stop="layer_on" :data-id="v[hrefKey]" :href="'p'+v[hrefKey]" :style="{width:imgWidth_c + 'px',height:v._height ? v._height+'px':false}"><img :src="v[srcKey]" /></a>
+            <a class="img-wraper" v-if="v[srcKey]" @click.stop="layer_on($event,v['data'])" :data-id="v[hrefKey]" :href="'p'+v[hrefKey]" :style="{width:imgWidth_c + 'px',height:v._height ? v._height+'px':false}"><img :src="v[srcKey]" /></a>
             <!--slot :index="i" :value="v"></slot-->
             <!--  -->
             <div class="img-info">
@@ -220,13 +220,13 @@
     right:0;
     bottom: 0;
     z-index:10;
-    background:rgba(240,239,240,.9);
+    background:rgba(240,239,240,.95);
     overflow-y:scroll;
     overflow-x:hidden;
     outline:none;
     /*cursor: crosshair;*/
     ">
-    <thread :tid="layerid"></thread>
+    <thread :tid="layerid" :data="layedata"></thread>
   </div>
 
 
@@ -335,6 +335,9 @@ export default {
       over: false, // 结束waterfall加载
       layer: false,
       layerid: 666,
+      layedata: function(){
+        return {}
+      },
     }
   },
   computed: {
@@ -346,11 +349,11 @@ export default {
     },
     hasLoadingSlot() {
       return !!this.$scopedSlots.loading
-    }
+    },    
   },
   mounted() {
     this.isMobile = !!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)
-    console.log(this.isMobile)
+    //console.log(this.isMobile)
     // 监听浏览器后退事件 如果点击前进呢?
     window.onpopstate = () => {
       if (this.layer) {
@@ -399,6 +402,9 @@ export default {
     }
   },
   methods: {
+    openlink(event, data) {
+      return this.isMobile ? router.push({ name:'p', params:{id:data.tid}}) : layer_on(event,data)
+    },
     layer_off: function(event) {
       // 先撤销底层的 tabindex 封禁 (使用tab切换时防止光标在底层的)
 
@@ -408,13 +414,19 @@ export default {
         window.history.go(-1) // 将 url 恢复
       }
     },
-    layer_on: function(event) {
+    layer_on: function(event, data) {
+      //console.log(data)
       /* 传参 注意必须是整数类型
        * 弹出层, 预装色块
        * 不触发 route 改变 URL
        * 必须给div聚焦 才能直接使用 ESC (在thread页面做)
        * 终止冒泡
-       */
+       */ 
+      //if(this.isMobile) {
+      //  router.push({ name:'p', params:{id:data.tid}})
+      //  return
+      //}
+
       var state = ({
         url: "2333",
         title: "~title",
@@ -423,7 +435,9 @@ export default {
       window.history.pushState(state, '~title', event.target.pathname)
 
       this.layerid = parseInt(event.target.dataset.id)
+      this.layedata = data
       this.layer = true
+      
 
       // 弹出层时要禁止 tab 切换到底层 (给其他层设置tabindex使其禁止)
       event.preventDefault()

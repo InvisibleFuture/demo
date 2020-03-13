@@ -17,13 +17,17 @@
     "@toast-ui/vue-editor": "^1.0.2",
     "axios": "^0.18.0",
     "china-city-data": "^1.0.1",
+    "js-md5": "^0.7.3",
     "koa": "^2.3.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "qrcodejs2": "0.0.2",
     "tui-editor": "^1.2.8",
     "vue": "^2.5.2",
+    "vue-amap": "^0.5.10",
     "vue-city-picker": "^1.1.1",
     "vue-router": "^3.0.1",
+    "vue-savedata": "^2.0.5",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

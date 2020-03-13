@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersiste from 'vue-savedata'
 
 Vue.use(Vuex)
 
@@ -11,15 +12,28 @@ export default new Vuex.Store({
     //products
   },
   //strict: debug,
-  //plugins: debug ? [createLogger()] : [],
+  plugins: [createPersiste()], //debug ? [createLogger(),createPersiste()] : [createPersiste()],
   state: {
     count: 10,
-    login: { id: 1, token: '46546546fdasdadas123344' },
-    user:[
-      { id: 1, name: 'Last', avatar:'/static/u1.jpg', ex: '组关联角色而不是角色关联组' },
-      { id: 2, name: '橘纸', avatar:'/static/u1.jpg', ex: '组关联角色而不是角色关联组' },
-      { id: 3, name: '白糖', avatar:'/static/u1.jpg', ex: '组关联角色而不是角色关联组' }
-    ],
+    online: false,
+    token: '',
+    user: {
+      uid: '',
+      gid: '',
+      username: '',
+      threads: '',
+      posts: '',
+      credits: '',
+      golds: '',
+      rmbs: '',
+      avatar: '',
+      digests: '',
+      digests_3: '',
+      groupname: '',
+      avatar_url: '',
+      avatar_path: '',
+      online_status: '',
+    },
     msg:[
       {id: 0, msg:'wlgdc..'},
       {id: 1, msg:'wlgdc..'},
@@ -39,6 +53,15 @@ export default new Vuex.Store({
   mutations: {
     increment (state) {
       state.count++
+    },
+    setuser(state, user){
+      state.user = user
+    },
+    settoken(state, token){
+      state.token= token
+    },
+    setonline(state, bool) {
+      state.online = bool
     }
   }
 })

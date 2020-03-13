@@ -6,9 +6,9 @@
       <div class="login" v-if="mode==0" v-on:click.stop>
         <h2>Login</h2>
         <ul>
-          <li><input value="" placeholder="account.."></li>
-          <li><input value="" placeholder="password.."></li>
-          <li><button>登录</button></li>
+          <li><input v-model="account" placeholder="account.."></li>
+          <li><input v-model="password" placeholder="password.."></li>
+          <li><button @click="signin()">登录</button></li>
         </ul>
         <p>还没有帐号? <span @click="mode=1">注册</span>一个</p>
       </div>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import md5 from 'js-md5'
 export default {
   name: 'login',
   data() {
@@ -35,8 +37,42 @@ export default {
       show: false,
       mode: 0,
       title: 'User',
-      msg: '没有创建角色..'
+      msg: '没有创建角色..',
+      account: "",
+      password: "",
+      lock: false,
     }
+  },
+  methods: {
+    signin: function () {
+      this.lock = true // 锁定按钮, 防止重复提交
+      let server = this.$store.state.server.master.domain
+      let bodyFormData = new FormData()
+      bodyFormData.set('mobile', this.account)
+      bodyFormData.set('password', md5(this.password))
+      axios({
+        method: 'post',
+        url: server + '/user-login.htm?ajax=1',
+        data: bodyFormData,
+        headers: {'Content-Type': 'multipart/form-data'}
+      }).then(r => {
+        console.log(r.data)
+        if (r.data.code == "0") {
+          this.$store.commit('settoken', r.data.message.token)
+          this.$store.commit('setuser', r.data.message.user)
+          this.$store.commit('setonline', true)
+          this.password = '' // 只在登录成功时才清空输入框
+          this.lock = false  // 解锁按钮
+          // 回收窗口
+        }else{
+          // 返回了错误信息, 回收已经添加的元素
+          this.lock = false  // 失败也解锁
+          window.alert(r.data.message)
+        }
+      })
+      // 当返回的http状态码错误时 回收已经添加的元素
+      this.lock = false // 解锁按钮
+    },
   },
   watch: {
     show: function(val) {
@@ -57,7 +93,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 ul#login {
     flex: 1;
     list-style: none;
@@ -75,7 +111,8 @@ ul#login {
         }
         > div {
             position: fixed;
-            background: rgba(255,255,255,.8);
+            //background: rgba(255,255,255,.8);
+            background: rgba(0,0,0,.5);
             z-index: 999;
             top: 0;
             bottom: 0;

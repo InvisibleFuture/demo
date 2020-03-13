@@ -90,7 +90,7 @@ export default {
 				cityList
 			} = this,
             cityName = ''
-            console.log(cityList)
+            //console.log(cityList)
 			Object.keys(cityList).forEach((item) => {
 				cityList[item].forEach((item) => {
 					if (value == item.id) {
@@ -118,7 +118,8 @@ export default {
 		},
 		// 选择标签
 		choiceTag(key) {
-			this.tagKey = key;
+            this.tagKey = key;
+            //console.log(key)
 		},
 		// 开始城市选择
 		startChoice(e) {
@@ -130,6 +131,7 @@ export default {
 		choiceCity(id) {
             this.value = id;
             console.log(id)
+            this.$emit('child-say', id) // 向父元素传递事件
 			this.immEndChoice();
 		},
 		// 鼠标离开城市选择区域时超过一定时间，关闭城市面板
@@ -188,9 +190,12 @@ export default {
   width: 245px;
   height: 28px;
   padding-left: 6px;
-  border: 1px solid #DDD;
+  border: none;
   outline: none;
   font-size: 14px;
+  border-radius: 0 4px 4px 0;
+  background: #5c6166;
+  color: #ffffff;
 }
 
 .vue-city-picker li {

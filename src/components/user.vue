@@ -1,8 +1,8 @@
 <template>
     <ul id="user">
       <li :class="{new:msgcount}">
-        <a href="user">You name</a>
-        <div class="msg">
+        <a href="user">You</a>
+        <!--div class="msg">
           <div>
             <span>清空记录</span>
           </div>
@@ -16,7 +16,7 @@
               </div>
             </li>
           </ul>
-        </div>
+        </div-->
       </li>
     </ul>
 </template>
