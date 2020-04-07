@@ -98,43 +98,6 @@ export default {
     data(){
         return {
             msgcount: 2,
-            msg: [{
-                id: 12,
-                content: "弱小 可怜又无助的 msgBox..",
-                time: "2分钟前",
-                new: false,
-                user: {
-                  id: 2,
-                  name: "Last",
-                  img: "http://xiaoyaozj.com/upload/avatar/000/104112.png?1583608106",
-                  url: "u2"
-                }
-              },
-              {
-                id: 15,
-                content: "用户点击不那么频繁，但是第一请求的数据量较多，花费的时间较长，第二次请求的数据较少，比第一次请求的数据早回来，先显示在界面上，等到第一次的数据回来之后，再把数据显示，就会覆盖掉第二次的显示的数据，这样让用户体验很不好",
-                time: "3分钟前",
-                new: true,
-                user: {
-                  id: 2,
-                  name: "Last",
-                  img: "http://xiaoyaozj.com/upload/avatar/000/104112.png?1583608106",
-                  url: "u2"
-                }
-              },
-              {
-                id: 13,
-                content: "wo.. Welcome to the remote collaboration team",
-                time: "15分钟前",
-                new: true,
-                user: {
-                  id: 2,
-                  name: "Last",
-                  img: "http://xiaoyaozj.com/upload/avatar/000/104112.png?1583608106",
-                  url: "u2"
-                }
-              }
-            ]
         }
     },
     methods: {

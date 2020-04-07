@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersiste from 'vue-savedata'
+//import createPersiste from 'vue-savedata'
+import createVuexAlong from "vuex-along"
 
 Vue.use(Vuex)
 
@@ -11,28 +12,29 @@ export default new Vuex.Store({
     //cart,
     //products
   },
+  plugins: [createVuexAlong()],
   //strict: debug,
-  plugins: [createPersiste()], //debug ? [createLogger(),createPersiste()] : [createPersiste()],
+  //plugins: [createPersiste()], //debug ? [createLogger(),createPersiste()] : [createPersiste()],
   state: {
     count: 10,
     online: false,
     token: '',
     user: {
-      uid: '',
-      gid: '',
-      username: '',
-      threads: '',
-      posts: '',
+      uid: 0,
+      gid: 0,
+      username: '游客',
+      threads: 0,
+      posts: 0,
       credits: '',
-      golds: '',
-      rmbs: '',
-      avatar: '',
+      golds: 0,
+      rmbs: 0,
+      avatar: 'http://xiaoyaozj.com/upload/avatar/000/104112.png?1583608106',
       digests: '',
       digests_3: '',
-      groupname: '',
-      avatar_url: '',
+      groupname: '游客',
+      avatar_url: 'http://xiaoyaozj.com/upload/avatar/000/104112.png?1583608106',
       avatar_path: '',
-      online_status: '',
+      online_status: '0',
     },
     msg:[
       {id: 0, msg:'wlgdc..'},

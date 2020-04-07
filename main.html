@@ -6,6 +6,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<title>{{title}}</title>
+	<script src="https://zeptojs.com/zepto.min.js"></script>
+	<script src="//webapi.amap.com/maps?v=1.4.15&key=16888b475af05afd1a7eb360dcf15d22&callback=my_init"></script>
+	<script src="//webapi.amap.com/ui/1.0/main-async.js"></script>
+	<script type="text/javascript">
+		function my_init() {
+			//initAMapUI()
+		}
+		initAMapUI()
+		AMapUI.setDomLibrary(Zepto);
+		//AMapUI.loadUI(['misc/MobiCityPicker'], function(MobiCityPicker) {
+		//  var cityPicker = new MobiCityPicker({
+		//    //topGroups: ..., // 顶部城市列表
+		//  });
+		//
+		//  //监听城市选中事件
+		//  cityPicker.on('citySelected', function(cityInfo) {
+		//    //隐藏城市列表
+		//    cityPicker.hide();
+		//
+		//    //选中的城市信息
+		//    console.log(cityInfo);
+		//  });
+		//  
+		//  //显示城市列表，可以用某个click事件触发
+		//  cityPicker.show();
+		//});
+
+	</script>
 </head>
 
 <body>

@@ -1,187 +1,184 @@
 <template>
-<ul id="login">
-  <li>
-    <a href="#login" @click="show=true">You login</a>
-    <div v-if="show" @click.stop="show=false" @keyup.esc="show=false" tabindex="-1" v-focus>
-      <div class="login" v-if="mode==0" v-on:click.stop>
-        <h2>Login</h2>
-        <ul>
-          <li><input v-model="account" placeholder="account.."></li>
-          <li><input v-model="password" placeholder="password.."></li>
-          <li><button @click="signin()">登录</button></li>
-        </ul>
-        <p>还没有帐号? <span @click="mode=1">注册</span>一个</p>
-      </div>
-      <div class="regist" v-else @click.stop>
-        <h2>Regist</h2>
-        <ul>
-          <li><input value="" placeholder="account.."></li>
-          <li><input value="" placeholder="password.."></li>
-          <li><input value="" placeholder="password re.."></li>
-          <li><button>注册</button></li>
-        </ul>
-        <p>已有帐号? <span v-on:click="mode=0">登录</span></p>
-      </div>
-    </div>
-  </li>
-</ul>
+	<ul id="login">
+		<li>
+			<a href="#login" @click="show=true;mode=0">
+				<svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5155"><path d="M512 512c141.4 0 256-114.6 256-256S653.4 0 512 0 256 114.6 256 256s114.6 256 256 256z m179.2 64h-33.4c-44.4 20.4-93.8 32-145.8 32s-101.2-11.6-145.8-32h-33.4C184.4 576 64 696.4 64 844.8V928c0 53 43 96 96 96h704c53 0 96-43 96-96v-83.2c0-148.4-120.4-268.8-268.8-268.8z" fill="" p-id="5156"></path></svg>
+				<span>登录</span>
+			</a>
+			<div v-if="show" @click.stop="show=false" @keyup.esc="show=false" tabindex="-1" v-focus>
+				<div class="login" v-if="mode==0" v-on:click.stop>
+					<h2>Login</h2>
+					<ul>
+						<li><input v-model="account" placeholder="account.."></li>
+						<li><input v-model="password" placeholder="password.."></li>
+						<li><button @click="signin()">登录</button></li>
+					</ul>
+					<p>还没有帐号? <span @click="mode=1">注册</span>一个</p>
+				</div>
+				<div class="regist" v-else @click.stop>
+					<h2>Regist</h2>
+					<ul>
+						<li><input value="" placeholder="account.."></li>
+						<li><input value="" placeholder="password.."></li>
+						<li><input value="" placeholder="password re.."></li>
+						<li><button>注册</button></li>
+					</ul>
+					<p>已有帐号? <span v-on:click="mode=0">登录</span></p>
+				</div>
+			</div>
+		</li>
+		<li>
+			<a href="#regedit" @click="show=true;mode=1">
+				<svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6430"><path d="M789.779 984.843c-31.732 0-61.762-6.041-90.096-18.134-28.334-12.088-53.08-28.709-74.234-49.865-21.151-21.156-37.772-45.897-49.864-74.229-12.087-28.334-18.134-58.362-18.134-90.1 0-31.732 6.047-61.762 18.134-90.095 12.091-28.333 28.714-52.893 49.864-73.664 21.154-20.78 45.899-37.214 74.234-49.301 28.333-12.091 58.363-18.136 90.096-18.136 31.734 0 61.765 6.044 90.098 18.136 28.334 12.087 52.888 28.521 73.665 49.301 20.779 20.774 37.21 45.334 49.3 73.664 12.088 28.333 18.137 58.362 18.137 90.095 0 31.737-6.049 61.766-18.137 90.1s-28.521 53.073-49.3 74.229c-20.78 21.157-45.332 37.778-73.665 49.865C851.545 978.802 821.514 984.843 789.779 984.843L789.779 984.843zM904.244 715.118l-83.865 0 0-78.197c0-10.581-3.395-19.645-10.198-27.203-6.801-7.554-15.489-11.332-26.069-11.332-10.575 0-18.887 3.778-24.929 11.332-6.043 7.559-9.068 16.622-9.068 27.203l0 78.197-73.665 0c-10.575 0-19.641 3.773-27.197 11.334-7.556 7.553-11.333 16.623-11.333 27.197 0 10.575 3.777 18.512 11.333 23.803 7.557 5.288 16.622 7.928 27.197 7.928l73.665 0 0 80.466c0 10.581 3.025 19.645 9.068 27.2 6.042 7.559 14.354 11.332 24.929 11.332 10.58 0 19.267-3.774 26.069-11.332 6.802-7.556 10.198-16.619 10.198-27.2L820.379 785.38l83.865 0 0 2.27c10.579 0 19.644-3.021 27.198-9.063 7.56-6.048 11.333-14.36 11.333-24.936 0-10.574-3.774-19.645-11.333-27.197C923.889 718.892 914.823 715.118 904.244 715.118L904.244 715.118zM624.321 432.927c-3.023 12.086-6.049 23.042-9.07 32.865-3.021 8.311-6.801 16.811-11.332 25.498-4.534 8.688-9.442 15.301-14.731 19.833-6.801 5.289-11.522 10.957-14.167 17-2.645 6.042-4.915 12.271-6.802 18.697-1.887 6.423-3.966 13.03-6.229 19.832-2.271 6.802-6.049 13.602-11.332 20.399-17.383 22.664-30.416 44.578-39.104 65.732-8.688 21.155-14.731 41.554-18.133 61.201-3.398 19.643-4.345 39.102-2.836 58.362 1.513 19.269 4.533 37.969 9.069 56.1 3.022 13.597 7.555 27.764 13.597 42.499 6.048 14.73 14.925 29.844 26.632 45.333 11.711 15.488 26.634 30.595 44.77 45.332 18.13 14.731 40.794 28.896 67.998 42.499-18.135 3.774-39.291 7.177-63.467 10.199-20.402 2.271-45.521 4.343-75.362 6.229-29.845 1.896-64.036 2.836-102.566 2.836-19.646 0-42.499-0.753-68.564-2.265-26.068-1.512-52.885-3.401-80.465-5.666-27.574-2.269-54.779-4.913-81.599-7.935-26.816-3.022-51.376-6.232-73.665-9.634-22.286-3.397-41.178-6.989-56.666-10.767-15.484-3.776-25.119-7.177-28.898-10.197-6.8-6.049-12.085-22.86-15.864-50.436-3.779-27.57-2.645-63.652 3.398-108.229 3.778-24.933 13.789-44.009 30.032-57.235 16.245-13.22 35.321-23.605 57.235-31.165 21.907-7.555 44.764-14.544 68.563-20.968 23.799-6.419 44.768-15.295 62.902-26.627 14.355-9.067 25.311-17.57 32.864-25.501 7.553-7.935 12.843-16.055 15.864-24.368 3.022-8.306 4.534-17 4.534-26.064 0-9.065-0.377-18.888-1.133-29.469-1.514-15.865-6.984-28.333-16.432-37.396-9.445-9.069-19.456-18.136-30.032-27.199-6.049-4.537-11.333-11.331-15.87-20.401-4.533-9.063-8.307-17.753-11.333-26.063-3.774-9.824-6.797-20.779-9.065-32.865-5.29-1.511-10.198-3.778-14.73-6.801-3.779-3.021-7.936-7.559-12.469-13.603-4.532-6.042-8.688-15.107-12.468-27.199-3.779-11.333-5.101-21.908-3.966-31.729 1.132-9.824 3.214-18.134 6.236-24.936 3.022-8.311 7.177-15.49 12.463-21.531 0-25.688 1.516-51.376 4.539-77.069 3.022-21.907 7.741-45.333 14.167-70.26 6.419-24.936 16.811-47.225 31.166-66.864 13.597-18.892 28.144-34.382 43.628-46.466 15.489-12.091 31.546-21.532 48.166-28.333 16.621-6.802 33.244-11.521 49.867-14.167C380.28 1.323 396.149 0 411.26 0c19.643 0 38.529 2.27 56.664 6.802 18.133 4.531 34.943 10.575 50.433 18.134 15.492 7.553 29.279 16.054 41.365 25.499 12.091 9.441 21.913 19.074 29.468 28.896 17.376 21.909 30.031 46.09 37.969 72.53 7.93 26.446 13.783 51.376 17.563 74.799 3.779 27.199 5.291 54.396 4.534 81.602 4.533 3.774 8.312 8.306 11.332 13.596 3.02 4.532 5.29 10.581 6.801 18.134 1.513 7.553 1.513 17 0 28.333-1.512 14.355-4.534 25.688-9.063 34-4.538 8.313-9.445 14.73-14.736 19.269C637.541 426.878 631.117 430.657 624.321 432.927L624.321 432.927z" p-id="6431"></path></svg>
+				<span>注册</span>
+			</a>
+		</li>
+	</ul>
 </template>
 
 <script>
-import axios from 'axios'
-import md5 from 'js-md5'
-export default {
-  name: 'login',
-  data() {
-    return {
-      show: false,
-      mode: 0,
-      title: 'User',
-      msg: '没有创建角色..',
-      account: "",
-      password: "",
-      lock: false,
-    }
-  },
-  methods: {
-    signin: function () {
-      this.lock = true // 锁定按钮, 防止重复提交
-      let server = this.$store.state.server.master.domain
-      let bodyFormData = new FormData()
-      bodyFormData.set('mobile', this.account)
-      bodyFormData.set('password', md5(this.password))
-      axios({
-        method: 'post',
-        url: server + '/user-login.htm?ajax=1',
-        data: bodyFormData,
-        headers: {'Content-Type': 'multipart/form-data'}
-      }).then(r => {
-        console.log(r.data)
-        if (r.data.code == "0") {
-          this.$store.commit('settoken', r.data.message.token)
-          this.$store.commit('setuser', r.data.message.user)
-          this.$store.commit('setonline', true)
-          this.password = '' // 只在登录成功时才清空输入框
-          this.lock = false  // 解锁按钮
-          // 回收窗口
-        }else{
-          // 返回了错误信息, 回收已经添加的元素
-          this.lock = false  // 失败也解锁
-          window.alert(r.data.message)
-        }
-      })
-      // 当返回的http状态码错误时 回收已经添加的元素
-      this.lock = false // 解锁按钮
-    },
-  },
-  watch: {
-    show: function(val) {
-      //if (val) {
-      //  let lay = document.getElementById('layer')
-      //  focus()
-      //}
-    }
-  },
-  directives: {
-    focus: {
-      // 指令的定义 用于聚焦元素
-      inserted: function(el) {
-        el.focus()
-      }
-    }
-  }
-}
+	import axios from 'axios'
+	import md5 from 'js-md5'
+	export default {
+		name: 'login',
+		data() {
+			return {
+				show: false,
+				mode: 0,
+				title: 'User',
+				msg: '没有创建角色..',
+				account: "",
+				password: "",
+				lock: false,
+			}
+		},
+		methods: {
+			signin: function () {
+				this.lock = true // 锁定按钮, 防止重复提交
+				let server = this.$store.state.server.master.domain
+				let bodyFormData = new FormData()
+				bodyFormData.set('mobile', this.account)
+				bodyFormData.set('password', md5(this.password))
+				axios({
+					method: 'post',
+					url: server + '/user-login.htm?ajax=1',
+					data: bodyFormData,
+					headers: {'Content-Type': 'multipart/form-data'}
+				}).then(r => {
+					console.log(r.data)
+					if (r.data.code == "0") {
+						// 先将数据格式补全
+						r.data.message.user.avatar_url = server+'/'+r.data.message.user.avatar_url
+
+						// 写入 vuex
+						this.$store.commit('settoken', r.data.message.token)
+						this.$store.commit('setuser', r.data.message.user)
+						this.$store.commit('setonline', true)
+						this.password = '' // 只在登录成功时才清空输入框
+						this.lock = false  // 解锁按钮
+						// TODO: 回收窗口
+						this.show = false
+					}else{
+						// TODO: 返回了错误信息, 回收已经添加的元素
+						this.lock = false  // 失败也解锁
+						window.alert(r.data.message)
+					}
+				})
+				this.lock = false
+			}
+		},
+		directives: {
+			focus: {
+				inserted: function(el) {
+					el.focus()
+				}
+			}
+		}
+	}
 </script>
 
 <style lang="less" scoped>
 ul#login {
-    flex: 1;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    > li {
-        float: right;
-        > a {
-            display: block;
-            padding: 1.5rem;
-            color: #fff;
-            border-radius: 3px;
-            text-decoration: none;
-            transition: all 0.3s linear;
-        }
-        > div {
-            position: fixed;
-            //background: rgba(255,255,255,.8);
-            background: rgba(0,0,0,.5);
-            z-index: 999;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            outline: none;
-
-            display: flex;
-            justify-content: center;
-            /* 水平居中 */
-            align-items: center;
-            /* 垂直居中 */
-            > div {
-                color: #ccc;
-                background: #fff;
-                width: 100%;
-                max-width: 400px;
-                border-radius: 3px;
-                padding: 1rem 0;
-                span {
-                    color: #42b983;
-                    //background: #ff0000;
-                }
-                h2 {
-                    padding: 1rem;
-                }
-                p {
-                    padding: 0.5rem 1rem;
-                }
-                ul {
-                    list-style: none;
-                    li {
-                        text-align: center;
-                        input {
-                            border: none;
-                            outline: none;
-                            //border-bottom: 1px solid #e8e8e8;
-                            padding: 1rem;
-                            margin: 1px 0;
-                            width: 95%;
-                            color: #666;
-                            background: #f8f8f8;
-                            font-size: 1.2rem;
-                            box-sizing: border-box;
-                        }
-                        input::-moz-placeholder {
-                            color: #ccc;
-                        }
-                        input::-webkit-input-placeholder {
-                            color: #ccc;
-                        }
-                        input:-ms-input-placeholder {
-                            color: #ccc;
-                        }
-                        button {
-                            border: none;
-                            outline: none;
-                            width: 95%;
-                            padding: 0.5rem 0;
-                            margin: 1rem 0;
-                            background: #c3c3c3;
-                            border-radius: 3px;
-                            font-size: 1.5rem;
-                            color: #fff;
-                        }
-                    }
-                }
-            }
-        }
-    }
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	> li {
+		> a {
+			display: block;
+			padding: 1.5rem;
+			color: #fff;
+			border-radius: 3px;
+			text-decoration: none;
+			transition: all 0.3s linear;
+		}
+		> div {
+			position: fixed;
+			background: rgba(0,0,0,.5);
+			z-index: 999;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			outline: none;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			> div {
+				color: #ccc;
+				background: #fff;
+				width: 100%;
+				max-width: 400px;
+				border-radius: 3px;
+				padding: 1rem 0;
+				span {
+					color: #42b983;
+				}
+				h2 {
+					padding: 1rem;
+				}
+				p {
+					padding: 0.5rem 1rem;
+				}
+				ul {
+					list-style: none;
+					li {
+						text-align: center;
+						input {
+							border: none;
+							outline: none;
+							padding: 1rem;
+							margin: 1px 0;
+							width: 95%;
+							color: #666;
+							background: #f8f8f8;
+							font-size: 1.2rem;
+							box-sizing: border-box;
+						}
+						input::-moz-placeholder {
+							color: #ccc;
+						}
+						input::-webkit-input-placeholder {
+							color: #ccc;
+						}
+						input:-ms-input-placeholder {
+							color: #ccc;
+						}
+						button {
+							border: none;
+							outline: none;
+							width: 95%;
+							padding: 0.5rem 0;
+							margin: 1rem 0;
+							background: #c3c3c3;
+							border-radius: 3px;
+							font-size: 1.5rem;
+							color: #fff;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 </style>

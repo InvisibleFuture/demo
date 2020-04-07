@@ -24,11 +24,14 @@
     "qrcodejs2": "0.0.2",
     "tui-editor": "^1.2.8",
     "vue": "^2.5.2",
+    "vue-active-swiper": "^1.1.2",
     "vue-amap": "^0.5.10",
     "vue-city-picker": "^1.1.1",
     "vue-router": "^3.0.1",
     "vue-savedata": "^2.0.5",
-    "vuex": "^3.0.1"
+    "vue-tabs-swiper": "^1.1.6",
+    "vuex": "^3.0.1",
+    "vuex-along": "^1.2.10"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -6,7 +6,7 @@
       <h1 v-text="h1"></h1>
       <h2 v-text="h2"></h2>
       <br>
-      <br>
+      <!--banner :bannerlist="bannerlist" :picurl="bannerlist" :linkurl="bannerlist"></banner-->
       <ul>
         <li v-for="item in list" v-bind:key="item.id">
           <router-link :to="item.url" v-text="item.name"></router-link>
@@ -27,12 +27,20 @@
 </template>
 
 <script>
+//import banner from '@/components/banner/banner.vue'
 export default {
-  name: 'Home',
+  components: {
+    //banner,
+  },
   data() {
     return {
       h1: 'Welcome to the remote collaboration team',
       h2: 'Essential Links',
+      bannerlist: [
+        'http://xiaoyaozj.com/view/img/old_user.png',
+        'http://xiaoyaozj.com/view/img/old_user.png',
+        'http://xiaoyaozj.com/view/img/old_user.png',
+      ],
       msg: 'none',
       count: 23,
       list: [{

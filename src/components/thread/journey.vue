@@ -10,7 +10,7 @@ ul.journey {
             display:flex;padding:10px 0;align-items:center;background:#64ac5c;color:#ffffff;
             transition: all 0.75s cubic-bezier(0.645, 0.045, 0, 1) 0s;
             >div.left {
-                flex:1; text-align:left; padding: 0 15px; display: flex;
+                flex:1; text-align: left; padding: 0 15px; display: flex;
                 >div {
                     padding: 0 15px;
                     font: 16px sans-serif;
