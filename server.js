@@ -42,5 +42,5 @@ app.use(async (ctx, next) => {
 })
 
 app.listen(8080)
-  .on('listening', () => console.log('服务已启动'))
+  .on('listening', () => console.log('服务已启动 :8080'))
   .on('error', err => console.log(err))
